@@ -2,8 +2,10 @@
 .vs/
 bin/
 obj/
+publish/
 *.user
 artifacts/
 .vscode/
 .dotnet/
 *.binlog
+*.dll
