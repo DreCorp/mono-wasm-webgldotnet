@@ -5,6 +5,7 @@ using WebAssembly;
 
 class Program
 {
+    static JSObject window;
     static JSObject canvas;
     static JSObject console;
 
@@ -12,9 +13,9 @@ class Program
     void Start()
     {
         console = Runtime.GetGlobalObject("console") as JSObject;
-        var window = (JSObject)Runtime.GetGlobalObject("window");
-        var width = window.GetObjectProperty("innerWidth");
-        var height = window.GetObjectProperty("innerHeight");
+        window = (JSObject)Runtime.GetGlobalObject("window");
+        var width = (int)window.GetObjectProperty("innerWidth");
+        var height = (int)window.GetObjectProperty("innerHeight");
         string s = width + " " + height;
         console.Invoke("log", s);
 
@@ -22,10 +23,10 @@ class Program
         using (var document = (JSObject)Runtime.GetGlobalObject("document"))
         using (var body = (JSObject)document.GetObjectProperty("body"))
         {
-           
-
             canvas = (JSObject)document.Invoke("createElement", "canvas");
             body.Invoke("appendChild", canvas);
+            canvas.SetObjectProperty("width", width);
+            canvas.SetObjectProperty("height", height);
         }
 
         var gl = new WebGLRenderingContext(canvas);
@@ -86,7 +87,7 @@ class Program
         gl.Enable(WebGLRenderingContextBase.DEPTH_TEST);
         gl.Viewport(0,0, (int)canvas.GetObjectProperty("width"), (int)canvas.GetObjectProperty("height"));
     
-        gl.ClearColor(0,0,0, 0);
+        gl.ClearColor(0,0,0, 1);
         gl.Clear(WebGLRenderingContextBase.COLOR_BUFFER_BIT);
 
         gl.DrawElements(WebGLRenderingContextBase.TRIANGLES,inds.Length,WebGLRenderingContextBase.UNSIGNED_SHORT, 0);
