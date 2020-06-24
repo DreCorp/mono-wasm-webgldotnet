@@ -50,7 +50,7 @@ namespace Engine
 
             sm = new ShaderManager();
 
-            currentScene = new Scene();
+            currentScene = new TestScene();
             Console.WriteLine($"Finished {this} initialization");
         }
 

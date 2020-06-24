@@ -19,6 +19,7 @@ Engine/Light.cs \
 Engine/MathHelper.cs \
 Engine/mEngine.cs \
 Engine/Scene.cs \
+Engine/TestScene.cs \
 Engine/ShaderManager.cs \
 Engine/ShaderProgram.cs \
 Engine/ShaderStrings.cs \
@@ -27,4 +28,9 @@ Engine/Shapes/Mesh.cs \
 Engine/Shapes/Quad.cs \
 Engine/Shapes/Sube.cs \
 && 
-mono $WASM_SDK/packager.exe --copy=always --out=./publish --asset=./index.html --asset=./m_helper.js rooms.dll
+mono $WASM_SDK/packager.exe \
+--copy=always \
+--out=./publish \
+--asset=./index.html \
+--asset=./m_helper.js \
+rooms.dll

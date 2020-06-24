@@ -2,11 +2,21 @@
  
 ## A small experiment using [mono-wasm](https://www.mono-project.com/news/2018/01/16/mono-static-webassembly-compilation/ "mono-wasm") and [WebGLDotNET](https://github.com/WaveEngine/WebGL.NET "WebGLDotNET").
 
+### Resources used:
+
+* [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a) guide by [Ali Bahraminezhad](https://github.com/0x414c49).
+
+* [Ali's](https://github.com/0x414c49) basic mono-wasm [example](https://github.com/0x414c49/mono-wasm-example).
+
+* Using `WebGLDotNET`: [Your first WebGL.NET app](https://geeks.ms/xamarinteam/2019/08/28/your-first-webgldotnet-app/) guide.
+
+* OpenGL with C#: [Neo Kabuto's](https://neokabuto.blogspot.com/) [OpenTK tutorial](https://neokabuto.blogspot.com/p/tutorials.html).
+
+***
+
 ### To compile:
 
 Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a "Run C# natively in browser") tutorial by [Ali Bahraminezhad](https://github.com/0x414c49):
-
-
 
 * Download and install Mono SDK for your OS.
 
@@ -16,7 +26,7 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * Define a variable called `$WASM_SDK`. For example: `$WASM_SDK="/path/to_wasm_sdk/"`. Dont forget the trailing slash.
 
-* Run the following command: `mcs /target:library -out:rooms.dll /noconfig /nostdlib /r:$WASM_SDK/wasm-bcl/wasm/mscorlib.dll /r:$WASM_SDK/wasm-bcl/wasm/System.dll /r:$WASM_SDK/wasm-bcl/wasm/System.Core.dll /r:$WASM_SDK/wasm-bcl/wasm/Facades/netstandard.dll /r:$WASM_SDK/wasm-bcl/wasm/System.Net.Http.dll /r:$WASM_SDK/framework/WebAssembly.Bindings.dll /r:$WASM_SDK/framework/WebAssembly.Bindings.dll /r:WebGLDotNET.dll /r:System.Numerics.Vectors.dll Program.cs Engine/Camera.cs Engine/CanvasHelper.cs Engine/Light.cs Engine/MathHelper.cs Engine/mEngine.cs Engine/Scene.cs Engine/ShaderManager.cs Engine/ShaderProgram.cs Engine/ShaderStrings.cs Engine/Shapes/Cube.cs Engine/Shapes/Mesh.cs Engine/Shapes/Quad.cs Engine/Shapes/Sube.cs` in the `rooms` folder.
+* Run the following command: `mcs /target:library -out:rooms.dll /noconfig /nostdlib /r:$WASM_SDK/wasm-bcl/wasm/mscorlib.dll /r:$WASM_SDK/wasm-bcl/wasm/System.dll /r:$WASM_SDK/wasm-bcl/wasm/System.Core.dll /r:$WASM_SDK/wasm-bcl/wasm/Facades/netstandard.dll /r:$WASM_SDK/wasm-bcl/wasm/System.Net.Http.dll /r:$WASM_SDK/framework/WebAssembly.Bindings.dll /r:$WASM_SDK/framework/WebAssembly.Bindings.dll /r:WebGLDotNET.dll /r:System.Numerics.Vectors.dll Program.cs Engine/Camera.cs Engine/CanvasHelper.cs Engine/Light.cs Engine/MathHelper.cs Engine/mEngine.cs Engine/Scene.cs Engine/TestScene.cs Engine/ShaderManager.cs Engine/ShaderProgram.cs Engine/ShaderStrings.cs Engine/Shapes/Cube.cs Engine/Shapes/Mesh.cs Engine/Shapes/Quad.cs Engine/Shapes/Sube.cs` in the `rooms` folder.
 
 * To add any other binaries include binary file name before `Program.cs`. For example add `r:/SomeBinary.dll` before `Program.cs`. Dont forget to include the actual binary file.
 
@@ -32,16 +42,4 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * Serve published folder as any other static/wasm webpage. 
 
-***
 
-### Resources used:
-
-***
-
-* [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a) guide by [Ali Bahraminezhad](https://github.com/0x414c49).
-
-* [Ali's](https://github.com/0x414c49) basic mono-wasm [example](https://github.com/0x414c49/mono-wasm-example).
-
-* `WebGLDotNET`: [Your first WebGL.NET app](https://geeks.ms/xamarinteam/2019/08/28/your-first-webgldotnet-app/) guide.
-
-* OpenGL with C#: [Neo Kabuto's](https://neokabuto.blogspot.com/) [OpenTK tutorial](https://neokabuto.blogspot.com/p/tutorials.html).
