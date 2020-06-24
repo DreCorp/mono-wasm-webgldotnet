@@ -14,7 +14,6 @@ namespace Engine
         public static float rCol = 0f;
         public static float gCol = 0f;
         public static float bCol = 0f;
-
         public static bool drawLines = false;
 
         public static Light light = new Light();
@@ -27,6 +26,12 @@ namespace Engine
             gl.Viewport(0, 0, (int)canvasWidth, (int)canvasHeight);
         }
 
+        public static void SetClearColor(float _r, float _g, float _b)
+        {
+            rCol = _r;
+            gCol = _g;
+            bCol = _b;
+        }
         public static void SetClearColorFromHex(string _hex)
         {
             Vector3 col = FloatRGBFromHex(_hex);

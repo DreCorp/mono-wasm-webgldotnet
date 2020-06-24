@@ -43,11 +43,10 @@ class Program
         CanvasHelper.light.diffuseIntensity = 1f;
         CanvasHelper.drawLines = false;
 
-
         CanvasHelper.gl = new WebGLRenderingContext(canvas, contextAttributes);
-        CanvasHelper.SetLightColorFromHex("#ffffff");
+        CanvasHelper.light.color = new float[] { 0.9f, 0.9f, 0.9f };
         CanvasHelper.SetCanvasViewportSize(width, height);
-        CanvasHelper.SetClearColorFromHex("#000000");
+        CanvasHelper.SetClearColor(0.3f, 0.3f, 0.3f);
 
         mengine = new mEngine();
 
@@ -55,12 +54,11 @@ class Program
         aTimer.Elapsed += OnTimedEvent;
         aTimer.AutoReset = true;
         aTimer.Enabled = true;
-
     }
 
     private static void OnTimedEvent(Object source, ElapsedEventArgs e)
     {
-        mengine.Update(0.03f);
+        mengine.Update(0.02f);
     }
 
     void Resize(int w, int h)

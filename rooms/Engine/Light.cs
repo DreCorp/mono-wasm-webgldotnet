@@ -11,7 +11,7 @@ namespace Engine
 
         public Light()
         {
-            Console.WriteLine($"Initializing {this}");
+
         }
 
         public Light(float[] _dir, float[] _color, float _diffuse = 0f, float _ambient = 0f)

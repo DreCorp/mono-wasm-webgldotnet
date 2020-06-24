@@ -35,10 +35,8 @@ namespace Engine
         {
             Console.WriteLine($"Initializing {this}");
             CanvasHelper.gl.ClearColor(CanvasHelper.rCol, CanvasHelper.gCol, CanvasHelper.bCol, 1f);
-            //await CanvasHelper.gl.ClearAsync(BufferBits.COLOR_BUFFER_BIT | BufferBits.DEPTH_BUFFER_BIT);
             CanvasHelper.gl.Enable(WebGLRenderingContextBase.DEPTH_TEST);
             CanvasHelper.gl.Enable(WebGLRenderingContextBase.CULL_FACE);
-            //await CanvasHelper.gl.FrontFaceAsync(FrontFaceDirection.CCW);
             CanvasHelper.gl.CullFace(WebGLRenderingContextBase.BACK);
 
             CanvasHelper.gl.Disable(WebGLRenderingContextBase.DITHER);

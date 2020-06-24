@@ -7,6 +7,7 @@
 Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a "Run C# natively in browser") tutorial by [Ali Bahraminezhad](https://github.com/0x414c49):
 
 
+
 * Download and install Mono SDK for your OS.
 
 * After installation make sure you can access both `mcs` and `mono` directly in your terminal.
@@ -27,11 +28,15 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * Add any other JS files with a `--asset=` prefix for it to be included in the published folder. For example `--asset=./some_js_file.js`.
 
-* Check `build.sh` for both compile and publish commands.
+* Alternatively run `build.sh` to compile and publish web-assembly files.
 
 * Serve published folder as any other static/wasm webpage. 
 
+***
+
 ### Resources used:
+
+***
 
 * [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a) guide by [Ali Bahraminezhad](https://github.com/0x414c49).
 
