@@ -20,21 +20,21 @@ This project initially started as a [Blazor](https://dotnet.microsoft.com/apps/a
 
 ### To compile:
 
-Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a "Run C# natively in browser") tutorial by [Ali Bahraminezhad](https://github.com/0x414c49):
+Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a "Run C# natively in browser") tutorial by [Ali Bahrami](https://github.com/0x414c49):
 
 * Download and install Mono SDK for your OS.
 
 * After installation make sure you can access both `mcs` and `mono` directly in your terminal.
 
-* Get the latest successful build of mono wasm [here](https://jenkins.mono-project.com/job/test-mono-mainline-wasm/label=ubuntu-1804-amd64/lastSuccessfulBuild/Azure/). Download and extract the .zip file designated with `sdks/wasm/mono-wasm-###########.zip`.
+* Get the latest successful build of `mono-wasm` [here](https://jenkins.mono-project.com/job/test-mono-mainline-wasm/label=ubuntu-1804-amd64/lastSuccessfulBuild/Azure/). Download and extract the `.zip` file designated with `sdks/wasm/mono-wasm-###########.zip`.
 
 * Define a variable called `$WASM_SDK`. For example: `$WASM_SDK="/path/to_wasm_sdk/"`. Dont forget the trailing slash.
 
-* Add compiled binaries `WebGLDotNET.dll` and `System.Numerics.Vectors.dll` to the `rooms` folder. At the moment you will need to compile them yourself.
+* Add compiled `WebGLDotNET.dll` binary to the `rooms` folder. At the moment you will need to compile it yourself.
 
 * Run `"compile"` command from `build.sh` in the `rooms` folder.
 
-* To add any other binaries include binary file name before `Program.cs` in the `compile` command. For example add `r:/SomeBinary.dll` before `Program.cs`. Dont forget to include the actual binary file.
+* To add any other binaries include binary file name before `Program.cs` in the `"compile"` command. For example add `r:/SomeBinary.dll` before `Program.cs`. Dont forget to include the actual binary file.
 
 * The `-out:` in the `"compile"` command defines output of your assembly. Add any other C# files at the end of the command. For example `SomeCSharpFile.cs`.
 

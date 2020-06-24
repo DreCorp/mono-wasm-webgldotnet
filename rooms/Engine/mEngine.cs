@@ -182,8 +182,6 @@ namespace Engine
 
             CanvasHelper.gl.Flush();
             CanvasHelper.gl.Finish();
-            //await CanvasHelper.gl.FinishAsync();
-            //await CanvasHelper.gl.EndBatchAsync();
         }
 
         void EnableVertexAttribArrays()
