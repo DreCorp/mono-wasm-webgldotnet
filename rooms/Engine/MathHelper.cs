@@ -9,16 +9,16 @@ namespace Engine
     {
         public static float[] Vec3ArrToFloatArr(Vector3[] _vec)
         {
-            int l = (int)_vec.Length *3;
+            int l = (int)_vec.Length * 3;
             float[] f = new float[l];
-            
-            for(int i = 0; i<_vec.Length; i++)
+
+            for (int i = 0; i < _vec.Length; i++)
             {
                 f[i] = _vec[i].X;
-                f[i+1] = _vec[i].Y;
-                f[i+2] = _vec[i].Z;
-
+                f[i + 1] = _vec[i].Y;
+                f[i + 2] = _vec[i].Z;
             }
+
             return f;
         }
 
@@ -31,8 +31,8 @@ namespace Engine
             nm[2] = m1[0] * m2[2] + m1[1] * m2[6] + m1[2] + m2[10] + m1[3] * m2[14];
             nm[3] = m1[0] * m2[3] + m2[1] * m2[7] + m1[2] + m2[11] + m1[3] * m2[15];
 
-            
-            return new float[]{};
+
+            return new float[] { };
         }
 
         public static float[] Mat4ToFloatArray(Matrix4x4 mat)

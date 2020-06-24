@@ -2,9 +2,13 @@
  
 ## A small experiment using [mono-wasm](https://www.mono-project.com/news/2018/01/16/mono-static-webassembly-compilation/ "mono-wasm") and [WebGLDotNET](https://github.com/WaveEngine/WebGL.NET "WebGLDotNET").
 
+This project initially started as a [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) app, but it quickly became apparent that the framework uses a lot of resources, diminishing WebGL's performance, and [Blazor Canvas](https://github.com/BlazorExtensions/Canvas) library is somewhat [lacking](https://github.com/BlazorExtensions/Canvas/issues) at the moment.
+
+***
+
 ### Resources used:
 
-* [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a) guide by [Ali Bahraminezhad](https://github.com/0x414c49).
+* [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a) guide by [Ali Bahrami](https://github.com/0x414c49).
 
 * [Ali's](https://github.com/0x414c49) basic mono-wasm [example](https://github.com/0x414c49/mono-wasm-example).
 
@@ -26,7 +30,7 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * Define a variable called `$WASM_SDK`. For example: `$WASM_SDK="/path/to_wasm_sdk/"`. Dont forget the trailing slash.
 
-* Add compiled binaries `WebGLDotNET.dll` and `System.Numerics.Vectors.dll` to the `rooms` folder.
+* Add compiled binaries `WebGLDotNET.dll` and `System.Numerics.Vectors.dll` to the `rooms` folder. At the moment you will need to compile them yourself.
 
 * Run `"compile"` command from `build.sh` in the `rooms` folder.
 

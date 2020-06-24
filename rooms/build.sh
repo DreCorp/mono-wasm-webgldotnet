@@ -1,5 +1,5 @@
 #!/bin/bash
-#compile
+#"compile" command:
 mcs /target:library \
 -out:rooms.dll \
 /noconfig \
@@ -30,7 +30,7 @@ Engine/Shapes/Mesh.cs \
 Engine/Shapes/Quad.cs \
 Engine/Shapes/Sube.cs \
 && 
-#publish
+#"publish" command:
 mono $WASM_SDK/packager.exe \
 --copy=always \
 --out=./publish \

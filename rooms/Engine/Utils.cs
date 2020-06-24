@@ -25,7 +25,6 @@ namespace Engine
             string colorcode = _hex.TrimStart('#');
             try
             {
-                //Console.WriteLine($"SetClearColorFromHex({_hex}) ");
                 if (colorcode.Length == 6)
                 {
                     int r = int.Parse(colorcode.Substring(0, 2), NumberStyles.HexNumber);
@@ -38,11 +37,10 @@ namespace Engine
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"CanvaseHelper.SetClearColorFromHex() EXCEPTIONS : {ex}");
+                Console.WriteLine($"Utils.SetClearColorFromHex() EXCEPTIONS : {ex}");
             }
 
             return col;
         }
     }
-
 }
