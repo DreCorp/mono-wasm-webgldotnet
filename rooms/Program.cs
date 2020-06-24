@@ -1,4 +1,5 @@
 using System;
+using System.Timers;
 using WebGLDotNET;
 using WebAssembly;
 using Engine;
@@ -8,6 +9,7 @@ class Program
     static JSObject window;
     static JSObject canvas;
     static mEngine mEngine;
+    static Timer aTimer;
     void Start()
     {
 
@@ -49,7 +51,17 @@ class Program
         CanvasHelper.SetClearColorFromHex("#000000");
 
         mEngine = new mEngine();
-        mEngine.Update(0.01f);
+
+        aTimer = new Timer(1000 / 30);
+        aTimer.Elapsed += OnTimedEvent;
+        aTimer.AutoReset = true;
+        aTimer.Enabled = true;
+
+    }
+
+    private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+    {
+        mEngine.Update(0.03f);
     }
 
     void Resize(int w, int h)

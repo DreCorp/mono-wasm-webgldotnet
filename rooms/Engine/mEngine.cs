@@ -84,38 +84,38 @@ namespace Engine
             indiceData = inds.ToArray();
             normalData = normals.ToArray();
 
-            //if (sm.mShader.GetAttribute("vPos") != -1)
-            //{
-            CanvasHelper.gl.BindBuffer(
-                WebGLRenderingContextBase.ARRAY_BUFFER,
-                sm.mShader.buffers["vPos"]);
+            if (sm.GetAttribute(sm.mShader, "vPos") != -1)
+            {
+                CanvasHelper.gl.BindBuffer(
+                    WebGLRenderingContextBase.ARRAY_BUFFER,
+                    sm.mShader.buffers["vPos"]);
 
-            CanvasHelper.gl.BufferData(
-                WebGLRenderingContextBase.ARRAY_BUFFER,
-                vertData,
-                WebGLRenderingContextBase.STATIC_DRAW);
+                CanvasHelper.gl.BufferData(
+                    WebGLRenderingContextBase.ARRAY_BUFFER,
+                    vertData,
+                    WebGLRenderingContextBase.STATIC_DRAW);
 
-            CanvasHelper.gl.VertexAttribPointer(
-                (uint)sm.GetAttribute(sm.mShader, "vPos"),
-                3,
-                WebGLRenderingContextBase.FLOAT,
-                false,
-                3 * sizeof(float), 0);
-            //}
+                CanvasHelper.gl.VertexAttribPointer(
+                    (uint)sm.GetAttribute(sm.mShader, "vPos"),
+                    3,
+                    WebGLRenderingContextBase.FLOAT,
+                    false,
+                    3 * sizeof(float), 0);
+            }
 
-            //if (sm.mShader.GetAttribute("vColor") != -1)
-            //{
-            CanvasHelper.gl.BindBuffer(WebGLRenderingContextBase.ARRAY_BUFFER, sm.mShader.buffers["vColor"]);
-            CanvasHelper.gl.BufferData(WebGLRenderingContextBase.ARRAY_BUFFER, colData, WebGLRenderingContextBase.DYNAMIC_DRAW);
-            CanvasHelper.gl.VertexAttribPointer((uint)sm.GetAttribute(sm.mShader, "vColor"), 3, WebGLRenderingContextBase.FLOAT, true, 3 * sizeof(float), 0);
-            //}
+            if (sm.GetAttribute(sm.mShader, "vColor") != -1)
+            {
+                CanvasHelper.gl.BindBuffer(WebGLRenderingContextBase.ARRAY_BUFFER, sm.mShader.buffers["vColor"]);
+                CanvasHelper.gl.BufferData(WebGLRenderingContextBase.ARRAY_BUFFER, colData, WebGLRenderingContextBase.DYNAMIC_DRAW);
+                CanvasHelper.gl.VertexAttribPointer((uint)sm.GetAttribute(sm.mShader, "vColor"), 3, WebGLRenderingContextBase.FLOAT, true, 3 * sizeof(float), 0);
+            }
 
-            //if (sm.mShader.GetAttribute("vNormal") != -1)
-            //{
-            CanvasHelper.gl.BindBuffer(WebGLRenderingContextBase.ARRAY_BUFFER, sm.mShader.buffers["vNormal"]);
-            CanvasHelper.gl.BufferData(WebGLRenderingContextBase.ARRAY_BUFFER, normalData, WebGLRenderingContextBase.DYNAMIC_DRAW);
-            CanvasHelper.gl.VertexAttribPointer((uint)sm.GetAttribute(sm.mShader, "vNormal"), 3, WebGLRenderingContextBase.FLOAT, true, 3 * sizeof(float), 0);
-            //}
+            if (sm.GetAttribute(sm.mShader, "vNormal") != -1)
+            {
+                CanvasHelper.gl.BindBuffer(WebGLRenderingContextBase.ARRAY_BUFFER, sm.mShader.buffers["vNormal"]);
+                CanvasHelper.gl.BufferData(WebGLRenderingContextBase.ARRAY_BUFFER, normalData, WebGLRenderingContextBase.DYNAMIC_DRAW);
+                CanvasHelper.gl.VertexAttribPointer((uint)sm.GetAttribute(sm.mShader, "vNormal"), 3, WebGLRenderingContextBase.FLOAT, true, 3 * sizeof(float), 0);
+            }
 
             foreach (Mesh m in currentScene.objects)
             {
@@ -140,14 +140,9 @@ namespace Engine
 
         public void Render()
         {
-            //await CanvasHelper.gl.ViewportAsync(0, 0, (int)(CanvasHelper.width), (int)(CanvasHelper.height));
-
-            //await CanvasHelper.gl.UseProgramAsync(sm.mShader.prog);
 
             CanvasHelper.gl.Clear(WebGLRenderingContextBase.COLOR_BUFFER_BIT | WebGLRenderingContextBase.DEPTH_BUFFER_BIT);
 
-            //
-            //await CanvasHelper.gl.BeginBatchAsync();
             EnableVertexAttribArrays();
 
             int indiceat = 0;
