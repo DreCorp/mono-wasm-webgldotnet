@@ -26,7 +26,9 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * Define a variable called `$WASM_SDK`. For example: `$WASM_SDK="/path/to_wasm_sdk/"`. Dont forget the trailing slash.
 
-*Run `"compile"` command from `build.sh` in the `rooms` folder.
+* Add compiled binaries `WebGLDotNET.dll` and `System.Numerics.Vectors.dll` to the `rooms` folder.
+
+* Run `"compile"` command from `build.sh` in the `rooms` folder.
 
 * To add any other binaries include binary file name before `Program.cs` in the `compile` command. For example add `r:/SomeBinary.dll` before `Program.cs`. Dont forget to include the actual binary file.
 
