@@ -8,7 +8,7 @@ class Program
 {
     static JSObject window;
     static JSObject canvas;
-    static mEngine mEngine;
+    static mEngine mengine;
     static Timer aTimer;
     void Start()
     {
@@ -39,7 +39,6 @@ class Program
         CanvasHelper.canvasHeight = height;
 
         CanvasHelper.light.direction = new float[] { 0.0f, 0.0f, 40.0f };
-
         CanvasHelper.light.ambientIntensity = 1f;
         CanvasHelper.light.diffuseIntensity = 1f;
         CanvasHelper.drawLines = false;
@@ -50,7 +49,7 @@ class Program
         CanvasHelper.SetCanvasViewportSize(width, height);
         CanvasHelper.SetClearColorFromHex("#000000");
 
-        mEngine = new mEngine();
+        mengine = new mEngine();
 
         aTimer = new Timer(1000 / 30);
         aTimer.Elapsed += OnTimedEvent;
@@ -61,7 +60,7 @@ class Program
 
     private static void OnTimedEvent(Object source, ElapsedEventArgs e)
     {
-        mEngine.Update(0.03f);
+        mengine.Update(0.03f);
     }
 
     void Resize(int w, int h)

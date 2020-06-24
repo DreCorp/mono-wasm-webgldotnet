@@ -27,6 +27,8 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * Add any other JS files with a `--asset=` prefix for it to be included in the published folder. For example `--asset=./some_js_file.js`.
 
+* Check `build.sh` for both compile and publish commands.
+
 * Serve published folder as any other static/wasm webpage. 
 
 ### Resources used:
@@ -37,4 +39,4 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * `WebGLDotNET`: [Your first WebGL.NET app](https://geeks.ms/xamarinteam/2019/08/28/your-first-webgldotnet-app/) guide.
 
-* OpenGL with C#: [Neo Kabuto's](https://neokabuto.blogspot.com/) [OpenTK tutorial](https://neokabuto.blogspot.com/p/tutorials.html)
+* OpenGL with C#: [Neo Kabuto's](https://neokabuto.blogspot.com/) [OpenTK tutorial](https://neokabuto.blogspot.com/p/tutorials.html).
