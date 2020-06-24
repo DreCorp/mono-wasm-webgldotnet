@@ -29,12 +29,12 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * Serve published folder as any other static/wasm webpage. 
 
-### If you have trouble compiling
+### Resources used:
 
-* Follow [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a "Run C# natively in browser") tutorial by [Ali Bahraminezhad](https://github.com/0x414c49).
+* [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a) guide by [Ali Bahraminezhad](https://github.com/0x414c49).
 
-* Download [Ali's](https://github.com/0x414c49) [example](https://github.com/0x414c49/mono-wasm-example) to get started.
+* [Ali's](https://github.com/0x414c49) basic mono-wasm [example](https://github.com/0x414c49/mono-wasm-example).
 
-* To start with `WebGLDotNET` use [Your first WebGL.NET app](https://geeks.ms/xamarinteam/2019/08/28/your-first-webgldotnet-app/) for a step-by-step guide.
+* `WebGLDotNET`: [Your first WebGL.NET app](https://geeks.ms/xamarinteam/2019/08/28/your-first-webgldotnet-app/) guide.
 
-* For more in-depth guide on OpenGL with C#, you can follow [Neo Kabuto's](https://neokabuto.blogspot.com/) [OpenTK tutorial](https://neokabuto.blogspot.com/p/tutorials.html)
+* OpenGL with C#: [Neo Kabuto's](https://neokabuto.blogspot.com/) [OpenTK tutorial](https://neokabuto.blogspot.com/p/tutorials.html)
