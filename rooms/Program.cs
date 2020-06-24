@@ -2,22 +2,23 @@
 using WebGLDotNET;
 using WebAssembly;
 
+using Utils;
 
 class Program
 {
     static JSObject window;
     static JSObject canvas;
-    static JSObject console;
 
     
     void Start()
     {
-        console = Runtime.GetGlobalObject("console") as JSObject;
+        Logger.Log("Starting App");
+       
         window = (JSObject)Runtime.GetGlobalObject("window");
         var width = (int)window.GetObjectProperty("innerWidth");
         var height = (int)window.GetObjectProperty("innerHeight");
         string s = width + " " + height;
-        console.Invoke("log", s);
+        Logger.Log($"Width: {width}, Height: {height}");
 
         
         using (var document = (JSObject)Runtime.GetGlobalObject("document"))
@@ -25,6 +26,7 @@ class Program
         {
             canvas = (JSObject)document.Invoke("createElement", "canvas");
             body.Invoke("appendChild", canvas);
+            canvas.SetObjectProperty("id", "mcanvas");
             canvas.SetObjectProperty("width", width);
             canvas.SetObjectProperty("height", height);
         }
@@ -74,6 +76,16 @@ class Program
         gl.AttachShader(shader_program, fShader);
 
         gl.LinkProgram(shader_program);
+
+        var attribCount = (int)gl.GetProgramParameter(shader_program, WebGLRenderingContextBase.ACTIVE_ATTRIBUTES);
+        var uniformCount = (int)gl.GetProgramParameter(shader_program, WebGLRenderingContextBase.ACTIVE_UNIFORMS);
+
+        for (uint i =0; i< attribCount; i++){
+            var info = (WebGLActiveInfo)gl.GetActiveAttrib(shader_program, i);
+            string name = info.Name;
+            //console.Invoke("log", name);
+        }
+        
         gl.UseProgram(shader_program);
 
         gl.BindBuffer(WebGLRenderingContextBase.ARRAY_BUFFER, vertex_buffer);
@@ -96,7 +108,7 @@ class Program
 
     void Resize(long w, long h) 
     {       
-        console.Invoke("log", $"{w} {h}");
+        //console.Invoke("log", $"{w} {h}");
     }
 }
 
