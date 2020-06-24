@@ -26,20 +26,18 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * Define a variable called `$WASM_SDK`. For example: `$WASM_SDK="/path/to_wasm_sdk/"`. Dont forget the trailing slash.
 
-* Run the following command: `mcs /target:library -out:rooms.dll /noconfig /nostdlib /r:$WASM_SDK/wasm-bcl/wasm/mscorlib.dll /r:$WASM_SDK/wasm-bcl/wasm/System.dll /r:$WASM_SDK/wasm-bcl/wasm/System.Core.dll /r:$WASM_SDK/wasm-bcl/wasm/Facades/netstandard.dll /r:$WASM_SDK/wasm-bcl/wasm/System.Net.Http.dll /r:$WASM_SDK/framework/WebAssembly.Bindings.dll /r:$WASM_SDK/framework/WebAssembly.Bindings.dll /r:WebGLDotNET.dll /r:System.Numerics.Vectors.dll Program.cs Engine/Camera.cs Engine/CanvasHelper.cs Engine/Light.cs Engine/MathHelper.cs Engine/mEngine.cs Engine/Scene.cs Engine/TestScene.cs Engine/ShaderManager.cs Engine/ShaderProgram.cs Engine/ShaderStrings.cs Engine/Shapes/Cube.cs Engine/Shapes/Mesh.cs Engine/Shapes/Quad.cs Engine/Shapes/Sube.cs` in the `rooms` folder.
+*Run `"compile"` command from `build.sh` in the `rooms` folder.
 
-* To add any other binaries include binary file name before `Program.cs`. For example add `r:/SomeBinary.dll` before `Program.cs`. Dont forget to include the actual binary file.
+* To add any other binaries include binary file name before `Program.cs` in the `compile` command. For example add `r:/SomeBinary.dll` before `Program.cs`. Dont forget to include the actual binary file.
 
-* The `-out:` defines output of your assembly. Add any other C# files at the end of the command. For example `SomeCSharpFile.cs`.
+* The `-out:` in the `"compile"` command defines output of your assembly. Add any other C# files at the end of the command. For example `SomeCSharpFile.cs`.
 
 * If compiles successfully, `rooms.dll` binary should be created.
 
-* Publish the binary for web-assembly with `mono $WASM_SDK/packager.exe --copy=always --out=./publish --asset=./index.html --asset=./m_helper.js rooms.dll`. This command runs `packager.exe`, a tool from Mono that publishes ready to serve web-assembly files. 
+* Publish the binary for web-assembly with `"publish"` command from the `build.sh`. This command runs `packager.exe`, a tool from Mono that publishes ready to serve web-assembly files.
 
 * Add any other JS files with a `--asset=` prefix for it to be included in the published folder. For example `--asset=./some_js_file.js`.
 
 * Alternatively run `build.sh` to compile and publish web-assembly files.
 
-* Serve published folder as any other static/wasm webpage. 
-
-
+* Serve published folder as any other static/wasm webpage.

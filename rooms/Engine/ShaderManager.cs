@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using WebGLDotNET;
 
 namespace Engine
@@ -20,9 +19,8 @@ namespace Engine
 
         void LoadShader()
         {
-            //Console.WriteLine($"{this}.LoadShader() call...");
-            vs = StringArrayToString(ShaderStrings.directional_vertex_shader());
-            fs = StringArrayToString(ShaderStrings.directional_fragment_shader());
+            vs = ShaderStrings.directional_vertex_shader;
+            fs = ShaderStrings.directional_fragment_shader;
             mShader = new ShaderProgram();
             InitProgram(mShader, vs, fs);
         }
@@ -50,8 +48,8 @@ namespace Engine
             bool vsComp = (bool)CanvasHelper.gl.GetShaderParameter(program.vs, WebGLRenderingContextBase.COMPILE_STATUS);
             bool fsComp = (bool)CanvasHelper.gl.GetShaderParameter(program.fs, WebGLRenderingContextBase.COMPILE_STATUS);
 
-            Console.WriteLine($"{this}: VS compile status: {vsComp}");
-            Console.WriteLine($"{this}: FS compile status: {fsComp}");
+            Console.WriteLine($"{this}: Vertex shader compile status: {vsComp}");
+            Console.WriteLine($"{this}: Fragment shader compile status: {fsComp}");
 
             LinkProgram(program);
         }
@@ -66,8 +64,8 @@ namespace Engine
             bool validateStatus =
                 (bool)CanvasHelper.gl.GetProgramParameter(program.prog, WebGLRenderingContextBase.VALIDATE_STATUS);
 
-            Console.WriteLine($"{this}: Program Link status: {linkStatus}");
-            Console.WriteLine($"{this}: Program Validate status: {validateStatus}");
+            Console.WriteLine($"{this}: Shader program Link status: {linkStatus}");
+            Console.WriteLine($"{this}: Shader program Validate status: {validateStatus}");
 
             int attribCount =
                 (int)CanvasHelper.gl.GetProgramParameter(program.prog, WebGLRenderingContextBase.ACTIVE_ATTRIBUTES);
@@ -153,24 +151,13 @@ namespace Engine
             else return null;
         }
 
-        public string StringArrayToString(string[] array)
-        {
-            // Concatenate all the elements into a StringBuilder.
-            StringBuilder builder = new StringBuilder();
-            foreach (string value in array)
-            {
-                builder.Append(value);
-                builder.Append('\n');
-            }
-            return builder.ToString();
-        }
+
     }
 
     public class AttributeInfo
     {
         public string name = "";
         public uint address = 0;
-
     }
 
     public class UniformInfo

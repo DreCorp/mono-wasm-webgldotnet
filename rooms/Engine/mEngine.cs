@@ -29,10 +29,6 @@ namespace Engine
         Matrix4x4 tempView;
         public mEngine()
         {
-            Initialize();
-        }
-        public void Initialize()
-        {
             Console.WriteLine($"Initializing {this}");
             CanvasHelper.gl.ClearColor(CanvasHelper.rCol, CanvasHelper.gCol, CanvasHelper.bCol, 1f);
             CanvasHelper.gl.Enable(WebGLRenderingContextBase.DEPTH_TEST);
@@ -67,6 +63,7 @@ namespace Engine
             normals.Clear();
 
             int vertCount = 0;
+
             foreach (Mesh m in currentScene.objects)
             {
                 verts.AddRange(m.GetVerts().ToList());
@@ -184,6 +181,7 @@ namespace Engine
             //DisableVertexAttribArrays();
 
             CanvasHelper.gl.Flush();
+            CanvasHelper.gl.Finish();
             //await CanvasHelper.gl.FinishAsync();
             //await CanvasHelper.gl.EndBatchAsync();
         }

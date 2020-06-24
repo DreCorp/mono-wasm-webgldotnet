@@ -1,4 +1,5 @@
 #!/bin/bash
+#compile
 mcs /target:library \
 -out:rooms.dll \
 /noconfig \
@@ -18,16 +19,18 @@ Engine/CanvasHelper.cs \
 Engine/Light.cs \
 Engine/MathHelper.cs \
 Engine/mEngine.cs \
-Engine/Scene.cs \
-Engine/TestScene.cs \
 Engine/ShaderManager.cs \
 Engine/ShaderProgram.cs \
 Engine/ShaderStrings.cs \
+Engine/Utils.cs \
+Engine/Scenes/Scene.cs \
+Engine/Scenes/TestScene.cs \
 Engine/Shapes/Cube.cs \
 Engine/Shapes/Mesh.cs \
 Engine/Shapes/Quad.cs \
 Engine/Shapes/Sube.cs \
 && 
+#publish
 mono $WASM_SDK/packager.exe \
 --copy=always \
 --out=./publish \
