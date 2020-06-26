@@ -2,7 +2,9 @@
  
 ## A small experiment using [mono-wasm](https://www.mono-project.com/news/2018/01/16/mono-static-webassembly-compilation/ "mono-wasm") and [WebGLDotNET](https://github.com/WaveEngine/WebGL.NET "WebGLDotNET").
 
-This project initially started as a [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) app, but it quickly became apparent that the framework uses a lot of resources, diminishing WebGL's performance, and [Blazor Canvas](https://github.com/BlazorExtensions/Canvas) library is somewhat [lacking](https://github.com/BlazorExtensions/Canvas/issues) at the moment.
+This project initially started as a [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) app, you can see it running [here](https://dwasm.netlify.app).
+However, it quickly became apparent that the framework uses a lot of resources, diminishing WebGL's performance, and [Blazor Canvas](https://github.com/BlazorExtensions/Canvas) library is somewhat [lacking](https://github.com/BlazorExtensions/Canvas/issues) at the moment.
+As a result this project was started.
 
 ***
 
@@ -18,7 +20,7 @@ This project initially started as a [Blazor](https://dotnet.microsoft.com/apps/a
 
 ***
 
-### To compile:
+### To compile (Linux only):
 
 Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a "Run C# natively in browser") tutorial by [Ali Bahrami](https://github.com/0x414c49):
 
@@ -46,4 +48,4 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * Alternatively run `build.sh` to compile and publish web-assembly files.
 
-* Serve published folder as any other static/wasm webpage.
+* Serve published folder as any other static webpage.

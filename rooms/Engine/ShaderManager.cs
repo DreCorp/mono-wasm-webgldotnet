@@ -80,26 +80,15 @@ namespace Engine
             {
                 WebGLActiveInfo ai = CanvasHelper.gl.GetActiveAttrib(program.prog, i);
                 Console.WriteLine($"Attribute {i} Name: {ai.Name}, Size: {ai.Size}, Type: {ai.Type}");
+                GenerateAttribute(program, ai.Name);
             }
 
             for (uint i = 0; i < uniformCount; i++)
             {
                 WebGLActiveInfo ai = CanvasHelper.gl.GetActiveUniform(program.prog, i);
                 Console.WriteLine($"Uniform {i} Name: {ai.Name}, Size: {ai.Size}, Type: {ai.Type}");
+                GenerateUniform(program, ai.Name);
             }
-
-            GenAttribs(program, "vPos", typeof(AttributeInfo));
-            GenAttribs(program, "vColor", typeof(AttributeInfo));
-            GenAttribs(program, "vNormal", typeof(AttributeInfo));
-
-            GenAttribs(program, "modelview", typeof(UniformInfo));
-            GenAttribs(program, "view", typeof(UniformInfo));
-            GenAttribs(program, "model", typeof(UniformInfo));
-
-            GenAttribs(program, "lightDir", typeof(UniformInfo));
-            GenAttribs(program, "lightColor", typeof(UniformInfo));
-            GenAttribs(program, "lightAmbientIntens", typeof(UniformInfo));
-            GenAttribs(program, "lightDiffuseIntens", typeof(UniformInfo));
 
             CanvasHelper.gl.UseProgram(program.prog);
 
@@ -109,32 +98,26 @@ namespace Engine
             CanvasHelper.gl.DeleteProgram(program.prog);
         }
 
-        void GenAttribs(ShaderProgram program, string _name, Type _type)
+        void GenerateAttribute(ShaderProgram program, string _name)
         {
-            if (_type == typeof(AttributeInfo))
-            {
+            AttributeInfo info = new AttributeInfo();
+            info.name = _name;
+            int addr = CanvasHelper.gl.GetAttribLocation(program.prog, _name);
+            info.address = (uint)addr;
 
-                AttributeInfo info = new AttributeInfo();
-                info.name = _name;
-                int addr = CanvasHelper.gl.GetAttribLocation(program.prog, _name);
-                info.address = (uint)addr;
+            program.attribs.Add(info.name, info);
 
-                program.attribs.Add(info.name, info);
-            }
-            else if (_type == typeof(UniformInfo))
-            {
-                UniformInfo info = new UniformInfo();
+            program.buffers.Add(_name, CanvasHelper.gl.CreateBuffer());
+        }
 
-                info.name = _name;
-                info.address = CanvasHelper.gl.GetUniformLocation(program.prog, _name);
+        void GenerateUniform(ShaderProgram program, string _name)
+        {
+            UniformInfo info = new UniformInfo();
 
-                program.uniforms.Add(info.name, info);
-            }
-            else
-            {
-                Console.WriteLine($"{this}.GenAttribs() - type is not supported");
-                return;
-            }
+            info.name = _name;
+            info.address = CanvasHelper.gl.GetUniformLocation(program.prog, _name);
+
+            program.uniforms.Add(info.name, info);
 
             program.buffers.Add(_name, CanvasHelper.gl.CreateBuffer());
         }
