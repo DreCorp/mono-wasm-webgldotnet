@@ -3,17 +3,15 @@ using System.Timers;
 using WebGLDotNET;
 using WebAssembly;
 using Engine;
-
 class Program
 {
     static JSObject window;
     static JSObject canvas;
     static mEngine mengine;
-    static Timer aTimer;
+    static KControls kcontrols;
 
-    void Start()
+    static void Main()
     {
-
         WebGLContextAttributes contextAttributes = new WebGLContextAttributes
         {
             Antialias = false,
@@ -51,19 +49,37 @@ class Program
 
         mengine = new mEngine();
 
-        aTimer = new Timer(1000 / 30);
-        aTimer.Elapsed += OnTimedEvent;
-        aTimer.AutoReset = true;
-        aTimer.Enabled = true;
-    }
+        kcontrols = new KControls();
 
-    private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        window.Invoke("update_stuff");
+    }
+    static void Update(JSObject e)
     {
         mengine.Update(0.02f);
+        if (e.GetObjectProperty("up") != null)
+        {
+
+            kcontrols.up = (bool)e.GetObjectProperty("up") ? true : false;
+            kcontrols.down = (bool)e.GetObjectProperty("down") ? true : false;
+            kcontrols.left = (bool)e.GetObjectProperty("left") ? true : false;
+            kcontrols.right = (bool)e.GetObjectProperty("right") ? true : false;
+
+        }
+
+        //Console.WriteLine($"UP:{kcontrols.up}, DOWN: {kcontrols.down}, LEFT: {kcontrols.left}, RIGHT: {kcontrols.right}");
+        e.Dispose();
     }
 
     void Resize(int w, int h)
     {
         CanvasHelper.SetCanvasViewportSize(w, h);
+    }
+
+    struct KControls
+    {
+        public bool up;
+        public bool down;
+        public bool left;
+        public bool right;
     }
 }
