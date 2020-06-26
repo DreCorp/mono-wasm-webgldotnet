@@ -9,7 +9,7 @@ using System.Numerics;
 
 namespace Engine
 {
-    public class mEngine : IDisposable
+    public class Renderer : IDisposable
     {
         public WebGLBuffer indexBuffer;
         ShaderManager sm;
@@ -27,7 +27,7 @@ namespace Engine
 
         Matrix4x4 view;
         Matrix4x4 tempView;
-        public mEngine()
+        public Renderer()
         {
             Console.WriteLine($"Initializing {this}");
             CanvasHelper.gl.ClearColor(CanvasHelper.rCol, CanvasHelper.gCol, CanvasHelper.bCol, 1f);
@@ -100,16 +100,42 @@ namespace Engine
 
             if (sm.GetAttribute(sm.mShader, "vColor") != -1)
             {
-                CanvasHelper.gl.BindBuffer(WebGLRenderingContextBase.ARRAY_BUFFER, sm.mShader.buffers["vColor"]);
-                CanvasHelper.gl.BufferData(WebGLRenderingContextBase.ARRAY_BUFFER, colData, WebGLRenderingContextBase.DYNAMIC_DRAW);
-                CanvasHelper.gl.VertexAttribPointer((uint)sm.GetAttribute(sm.mShader, "vColor"), 3, WebGLRenderingContextBase.FLOAT, true, 3 * sizeof(float), 0);
+                CanvasHelper.gl.BindBuffer(
+                    WebGLRenderingContextBase.ARRAY_BUFFER,
+                    sm.mShader.buffers["vColor"]);
+
+                CanvasHelper.gl.BufferData(
+                    WebGLRenderingContextBase.ARRAY_BUFFER,
+                    colData,
+                    WebGLRenderingContextBase.STATIC_DRAW);
+
+                CanvasHelper.gl.VertexAttribPointer(
+                    (uint)sm.GetAttribute(sm.mShader, "vColor"),
+                    3,
+                    WebGLRenderingContextBase.FLOAT,
+                    false,
+                    3 * sizeof(float),
+                    0);
             }
 
             if (sm.GetAttribute(sm.mShader, "vNormal") != -1)
             {
-                CanvasHelper.gl.BindBuffer(WebGLRenderingContextBase.ARRAY_BUFFER, sm.mShader.buffers["vNormal"]);
-                CanvasHelper.gl.BufferData(WebGLRenderingContextBase.ARRAY_BUFFER, normalData, WebGLRenderingContextBase.DYNAMIC_DRAW);
-                CanvasHelper.gl.VertexAttribPointer((uint)sm.GetAttribute(sm.mShader, "vNormal"), 3, WebGLRenderingContextBase.FLOAT, true, 3 * sizeof(float), 0);
+                CanvasHelper.gl.BindBuffer(
+                    WebGLRenderingContextBase.ARRAY_BUFFER,
+                    sm.mShader.buffers["vNormal"]);
+
+                CanvasHelper.gl.BufferData(
+                    WebGLRenderingContextBase.ARRAY_BUFFER,
+                    normalData,
+                    WebGLRenderingContextBase.STATIC_DRAW);
+
+                CanvasHelper.gl.VertexAttribPointer(
+                    (uint)sm.GetAttribute(sm.mShader, "vNormal"),
+                    3,
+                    WebGLRenderingContextBase.FLOAT,
+                    false,
+                    3 * sizeof(float),
+                    0);
             }
 
             foreach (Mesh m in currentScene.objects)
@@ -123,7 +149,7 @@ namespace Engine
             }
 
             CanvasHelper.gl.BindBuffer(WebGLRenderingContextBase.ELEMENT_ARRAY_BUFFER, indexBuffer);
-            CanvasHelper.gl.BufferData(WebGLRenderingContextBase.ELEMENT_ARRAY_BUFFER, indiceData, WebGLRenderingContextBase.DYNAMIC_DRAW);
+            CanvasHelper.gl.BufferData(WebGLRenderingContextBase.ELEMENT_ARRAY_BUFFER, indiceData, WebGLRenderingContextBase.STATIC_DRAW);
 
             //view = currentScene.cam.GetViewMatrix();
 
@@ -181,7 +207,7 @@ namespace Engine
             //DisableVertexAttribArrays();
 
             CanvasHelper.gl.Flush();
-            CanvasHelper.gl.Finish();
+            //CanvasHelper.gl.Finish();
         }
 
         void EnableVertexAttribArrays()

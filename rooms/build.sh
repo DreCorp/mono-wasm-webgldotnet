@@ -17,7 +17,7 @@ Engine/Camera.cs \
 Engine/CanvasHelper.cs \
 Engine/Light.cs \
 Engine/MathHelper.cs \
-Engine/mEngine.cs \
+Engine/Renderer.cs \
 Engine/ShaderManager.cs \
 Engine/ShaderProgram.cs \
 Engine/ShaderStrings.cs \

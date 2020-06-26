@@ -7,7 +7,7 @@ class Program
 {
     static JSObject window;
     static JSObject canvas;
-    static mEngine mengine;
+    static Renderer renderer;
     static KControls kcontrols;
 
     static void Main()
@@ -48,7 +48,7 @@ class Program
         CanvasHelper.SetCanvasViewportSize(width, height);
         CanvasHelper.SetClearColor(0.3f, 0.3f, 0.3f);
 
-        mengine = new mEngine();
+        renderer = new Renderer();
 
         kcontrols = new KControls();
 
@@ -56,7 +56,7 @@ class Program
     }
     void Update(JSObject e)
     {
-        mengine.Update(0.02f);
+        renderer.Update(0.02f);
 
         kcontrols.up = (bool)e.GetObjectProperty("up");
         kcontrols.down = (bool)e.GetObjectProperty("down");

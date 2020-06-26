@@ -54,7 +54,6 @@ namespace Engine
             for (int i = 0; i < verts.Length; i++)
             {
                 verts[i] = new Vector3(f[i * 3], f[i * 3 + 1], f[i * 3 + 2]);
-                //Console.WriteLine($"{this} vert {i} {verts[i]}");
             }
 
             ushort[] inds = GetIndices();
@@ -82,10 +81,7 @@ namespace Engine
                 normals[i * 3] = _normals[i].X;
                 normals[i * 3 + 1] = _normals[i].Y;
                 normals[i * 3 + 2] = _normals[i].Z;
-                //Console.WriteLine($"{this} normal {i} : {_normals[i]}");
             }
-
-            //Console.WriteLine($"CalculateNormals(): {this} has {VertCount} verts, {NormalCount} normals, {IndiceCount} indices, {ColorDataCount} color datas");
         }
     }
 }

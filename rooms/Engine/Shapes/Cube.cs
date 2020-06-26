@@ -1,4 +1,3 @@
-//using OpenTK;
 using System.Numerics;
 
 namespace Engine
@@ -7,7 +6,6 @@ namespace Engine
     {
         float[] verts;
         float[] colorData;
-
         ushort[] inds;
 
         public Cube()
@@ -22,8 +20,6 @@ namespace Engine
 
         public void Setup(Vector3 _color)
         {
-            //VertCount = 8;
-            //ColorDataCount = 8;
             VertCount = 24;
             IndiceCount = 36;
             ColorDataCount = 24;
@@ -68,23 +64,8 @@ namespace Engine
                 -0.5f,-0.5f,0.5f
             };
 
-
-
             color = _color;
         }
-
-        /*
-        public override void CalculateModelMatrix()
-        {
-            modelMatrix = Matrix4x4.CreateScale(Scale)
-            * Matrix4x4.CreateRotationX(Rotation.X)
-            * Matrix4x4.CreateRotationY(Rotation.Y)
-            * Matrix4x4.CreateRotationZ(Rotation.Z)
-            * Matrix4x4.CreateTranslation(Position);
-
-            //Matrix4x4.Invert(modelMatrix, out modelMatrix);
-        }
-        */
 
         public override float[] GetColorData()
         {
@@ -95,20 +76,13 @@ namespace Engine
                 colorData[i * 3 + 1] = color.Y;
                 colorData[i * 3 + 2] = color.Z;
             }
+
             return colorData;
         }
+
+
         public override ushort[] GetIndices(int offset = 0)
         {
-            /*
-            short[] inds = new short[]
-            {
-                0,1,2,2,3,0,
-                3,2,5,5,4,3,
-                4,5,6,6,7,4,
-                7,6,1,1,0,7,
-                7,0,3,3,4,7,
-                1,6,5,5,2,1,
-            };*/
             inds = new ushort[]
             {
                 0,1,2,0,3,1,

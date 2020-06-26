@@ -9,7 +9,7 @@ namespace Engine
         {
             this.cam.position = new Vector3(0, 0, 10);
             GenerateTestCubes(50);
-            //GenerateTestQuads(20);
+            //GenerateTestQuads(50);
         }
 
         public override void Update(float e)
@@ -32,7 +32,7 @@ namespace Engine
         private void GenerateTestQuad()
         {
             Random r = new Random();
-            int span = 3;
+            int span = 5;
 
             Quad q = new Quad();
             q.color = new Vector3(r.Next(0, 2), r.Next(0, 2), r.Next(0, 2));
@@ -45,7 +45,6 @@ namespace Engine
 
         private void GenerateTestSubes(int _amount)
         {
-
             for (int i = 0; i < _amount; i++)
             {
                 GenerateTestSube();
@@ -56,7 +55,6 @@ namespace Engine
         {
             Random r = new Random();
             int span = 3;
-
 
             Sube s = new Sube();
             s.color = new Vector3(r.Next(0, 2), r.Next(0, 2), r.Next(0, 2));

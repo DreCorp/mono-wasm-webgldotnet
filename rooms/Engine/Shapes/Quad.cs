@@ -36,16 +36,7 @@ namespace Engine
 
             color = _color;
         }
-        /*
-        public override void CalculateModelMatrix()
-        {
-            modelMatrix = Matrix4x4.CreateScale(Scale)
-            * Matrix4x4.CreateRotationX(Rotation.X)
-            * Matrix4x4.CreateRotationY(Rotation.Y)
-            * Matrix4x4.CreateRotationZ(Rotation.Z)
-            * Matrix4x4.CreateTranslation(Position);
-        }
-        */
+
         public override float[] GetColorData()
         {
             colorData = new float[ColorDataCount * 3];
