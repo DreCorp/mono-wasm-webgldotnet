@@ -7,7 +7,9 @@ namespace Engine
     {
         public TestScene() : base()
         {
-            GenerateTestCubes();
+            this.cam.position = new Vector3(0, 0, 10);
+            GenerateTestCubes(10);
+            //GenerateTestQuads(20);
         }
 
         public override void Update(float e)

@@ -1,5 +1,4 @@
 using System;
-using System.Timers;
 using WebGLDotNET;
 using WebAssembly;
 using Engine;
@@ -10,7 +9,7 @@ class Program
     static mEngine mengine;
     static KControls kcontrols;
 
-    static void Main()
+    void Main()
     {
         WebGLContextAttributes contextAttributes = new WebGLContextAttributes
         {
@@ -51,35 +50,35 @@ class Program
 
         kcontrols = new KControls();
 
-        window.Invoke("update_stuff");
+        window.Invoke("update_game");
     }
-    static void Update(JSObject e)
+    void Update(JSObject e)
     {
         mengine.Update(0.02f);
-        if (e.GetObjectProperty("up") != null)
-        {
 
-            kcontrols.up = (bool)e.GetObjectProperty("up") ? true : false;
-            kcontrols.down = (bool)e.GetObjectProperty("down") ? true : false;
-            kcontrols.left = (bool)e.GetObjectProperty("left") ? true : false;
-            kcontrols.right = (bool)e.GetObjectProperty("right") ? true : false;
+        kcontrols.up = (bool)e.GetObjectProperty("up");
+        kcontrols.down = (bool)e.GetObjectProperty("down");
+        kcontrols.left = (bool)e.GetObjectProperty("left");
+        kcontrols.right = (bool)e.GetObjectProperty("right");
 
-        }
-
-        //Console.WriteLine($"UP:{kcontrols.up}, DOWN: {kcontrols.down}, LEFT: {kcontrols.left}, RIGHT: {kcontrols.right}");
         e.Dispose();
     }
 
-    void Resize(int w, int h)
+    void ResizeViewport(int w, int h)
     {
         CanvasHelper.SetCanvasViewportSize(w, h);
     }
 
-    struct KControls
+    void ChangeDrawPrimitive()
     {
-        public bool up;
-        public bool down;
-        public bool left;
-        public bool right;
+        CanvasHelper.drawLines = CanvasHelper.drawLines ? false : true;
     }
+}
+
+struct KControls
+{
+    public bool up;
+    public bool down;
+    public bool left;
+    public bool right;
 }

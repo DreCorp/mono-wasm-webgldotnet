@@ -61,6 +61,8 @@ namespace Engine
 
                 fNormal = normMatrix * vNormal;
                 fPos = (model * vec4(vPos, 1.0)).xyz;
+
+                gl_PointSize = 10.0;
             }
         ";
 
@@ -110,5 +112,39 @@ namespace Engine
                 gl_FragColor = outputColor;
             }
         ";
+
+        public const string basic_vertex_shader = @"
+            precision lowp float;
+
+           
+
+            attribute vec3 vPos;
+            attribute vec3 vColor;
+
+            
+            varying vec3 fColor;
+
+            uniform mat4 modelview;
+
+            void main(){
+
+                gl_Position = modelview * vec4(vPos, 1.0);
+                fColor = vColor;
+
+                gl_PointSize = 10.0;
+            }
+        ";
+
+        public const string basic_fragment_shader = @"
+            precision lowp float;
+           
+            varying vec3 fColor;
+
+            void main(){
+                gl_FragColor = vec4(fColor, 1.0);
+            }
+        ";
     }
+
+
 }

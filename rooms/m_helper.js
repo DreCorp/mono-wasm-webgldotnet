@@ -14,8 +14,9 @@ let that = this;
 var App = {
     init: function () {
         that.start = Module.mono_bind_static_method("[rooms] Program:Main");
-        that.resize = Module.mono_bind_static_method("[rooms] Program:Resize");
+        that.resize = Module.mono_bind_static_method("[rooms] Program:ResizeViewport");
         that.update = Module.mono_bind_static_method("[rooms] Program:Update");
+        that.change = Module.mono_bind_static_method("[rooms] Program:ChangeDrawPrimitive");
         that.start();
     }
 };
@@ -37,6 +38,9 @@ window.addEventListener('keydown', (e) => {
     if (e.repeat === true) {
         return;
     }
+
+    if (e.key === 'p') { that.change(); }
+
     if (e.key === 'w') { keyspressed.up = true; }
     if (e.key === 's') { keyspressed.down = true; }
     if (e.key === 'a') { keyspressed.left = true; }
@@ -57,17 +61,17 @@ const initialTime = Date.now();
 var currTime;
 var elapsedTime;
 
-function update_stuff() {
-    //window.setInterval(update_stuff, 300);
-    window.requestAnimationFrame(update_stuff);
+function update_game() {
+
+    window.requestAnimationFrame(update_game);
+
     currTime = Date.now();
 
     if (currTime >= lastDrawTime + FPS) {
 
         lastDrawTime = currTime;
-
         elapsedTime = currTime - initialTime;
-        //console.log(lastDrawTime);
+
         that.update(keyspressed);
     }
 }
