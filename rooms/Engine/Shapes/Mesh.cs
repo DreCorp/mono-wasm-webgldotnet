@@ -1,12 +1,9 @@
-using System;
 using System.Numerics;
 
 namespace Engine
 {
     public abstract class Mesh
     {
-        //public Material material = new Material();
-
         public Vector3 Position = Vector3.Zero;
         public Vector3 Rotation = Vector3.Zero;
         public Vector3 Scale = Vector3.One;

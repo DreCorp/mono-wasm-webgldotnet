@@ -2,6 +2,7 @@ using System;
 using WebGLDotNET;
 using WebAssembly;
 using Engine;
+
 class Program
 {
     static JSObject window;
@@ -9,8 +10,9 @@ class Program
     static mEngine mengine;
     static KControls kcontrols;
 
-    void Main()
+    static void Main()
     {
+
         WebGLContextAttributes contextAttributes = new WebGLContextAttributes
         {
             Antialias = false,

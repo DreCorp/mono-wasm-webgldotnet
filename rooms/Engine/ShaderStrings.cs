@@ -116,11 +116,8 @@ namespace Engine
         public const string basic_vertex_shader = @"
             precision lowp float;
 
-           
-
             attribute vec3 vPos;
             attribute vec3 vColor;
-
             
             varying vec3 fColor;
 

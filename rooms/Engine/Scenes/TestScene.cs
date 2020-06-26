@@ -8,7 +8,7 @@ namespace Engine
         public TestScene() : base()
         {
             this.cam.position = new Vector3(0, 0, 10);
-            GenerateTestCubes(10);
+            GenerateTestCubes(50);
             //GenerateTestQuads(20);
         }
 
@@ -70,7 +70,7 @@ namespace Engine
         private void GenerateTestCube()
         {
             Random r = new Random();
-            int span = 3;
+            int span = 5;
 
             Cube c = new Cube();
             c.color = new Vector3(r.Next(0, 2), r.Next(0, 2), r.Next(0, 2));

@@ -133,8 +133,6 @@ namespace Engine
             if (program.uniforms.ContainsKey(_name)) return program.uniforms[_name].address;
             else return null;
         }
-
-
     }
 
     public class AttributeInfo
