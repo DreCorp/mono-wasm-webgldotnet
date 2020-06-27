@@ -128,22 +128,22 @@ namespace Engine
 
         private void GenerateTestCubes()
         {
-            Cube c = new Cube();
-            c.color = new Vector3(1, 0, 0);
+            Cube c = new Cube(new Vector3(1, 0, 0));
+            //c.color = new Vector3(1, 0, 0);
             c.Position = new Vector3(0, 0, 0);
             c.Rotation = Vector3.Zero;
             c.Scale = Vector3.One;
             c.CalculateNormals();
 
-            Cube c1 = new Cube();
-            c1.color = new Vector3(0, 1, 0);
+            Cube c1 = new Cube(new Vector3(0, 1, 0));
+            //c1.color = new Vector3(0, 1, 0);
             c1.Position = new Vector3(-2f, 0, 0);
             c1.Rotation = Vector3.Zero;
             c1.Scale = Vector3.One;
             c1.CalculateNormals();
 
-            Cube c2 = new Cube();
-            c2.color = new Vector3(0, 0, 1);
+            Cube c2 = new Cube(new Vector3(0, 0, 1));
+            //c2.color = new Vector3(0, 0, 1);
             c2.Position = new Vector3(2f, 0, 0);
             c2.Rotation = Vector3.Zero;
             c2.Scale = Vector3.One;
@@ -155,8 +155,8 @@ namespace Engine
             c3.Scale = Vector3.One;
             c3.CalculateNormals();
 
-            Cube c4 = new Cube();
-            c4.color = new Vector3(1, 0, 1);
+            Cube c4 = new Cube(new Vector3(1, 0, 1));
+            //c4.color = new Vector3(1, 0, 1);
             c4.Position = new Vector3(0, -2f, 0);
             c4.Rotation = Vector3.Zero;
             c4.Scale = Vector3.One;

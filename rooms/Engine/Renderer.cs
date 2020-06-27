@@ -47,16 +47,11 @@ namespace Engine
             sm = new ShaderManager();
 
             currentScene = new TestScene();
+            AssociateAttribs();
             Console.WriteLine($"Finished {this} initialization");
         }
-
-        public void Update(float dTime)
+        void AssociateAttribs()
         {
-            if (currentScene != null)
-            {
-                currentScene.Update(dTime);
-            }
-
             verts.Clear();
             colors.Clear();
             inds.Clear();
@@ -95,7 +90,8 @@ namespace Engine
                     3,
                     WebGLRenderingContextBase.FLOAT,
                     false,
-                    3 * sizeof(float), 0);
+                    3 * sizeof(float),
+                    0);
             }
 
             if (sm.GetAttribute(sm.mShader, "vColor") != -1)
@@ -138,6 +134,20 @@ namespace Engine
                     0);
             }
 
+            CanvasHelper.gl.BindBuffer(
+                WebGLRenderingContextBase.ELEMENT_ARRAY_BUFFER, indexBuffer);
+            CanvasHelper.gl.BufferData(
+                WebGLRenderingContextBase.ELEMENT_ARRAY_BUFFER,
+                indiceData,
+                WebGLRenderingContextBase.STATIC_DRAW);
+        }
+        public void Update(float dTime)
+        {
+            if (currentScene != null)
+            {
+                currentScene.Update(dTime);
+            }
+
             foreach (Mesh m in currentScene.objects)
             {
                 m.CalculateModelMatrix();
@@ -147,10 +157,6 @@ namespace Engine
 
                 m.ModelViewProjectionMatrix = m.modelMatrix * m.ViewProjectionMatrix;
             }
-
-            CanvasHelper.gl.BindBuffer(WebGLRenderingContextBase.ELEMENT_ARRAY_BUFFER, indexBuffer);
-            CanvasHelper.gl.BufferData(WebGLRenderingContextBase.ELEMENT_ARRAY_BUFFER, indiceData, WebGLRenderingContextBase.STATIC_DRAW);
-
             //view = currentScene.cam.GetViewMatrix();
 
             tempView = currentScene.cam.GetViewMatrix();
@@ -194,11 +200,19 @@ namespace Engine
 
                 if (!CanvasHelper.drawLines)
                 {
-                    CanvasHelper.gl.DrawElements(WebGLRenderingContextBase.TRIANGLES, m.IndiceCount, WebGLRenderingContextBase.UNSIGNED_SHORT, (uint)(indiceat * sizeof(ushort)));
+                    CanvasHelper.gl.DrawElements(
+                        WebGLRenderingContextBase.TRIANGLES,
+                        m.IndiceCount,
+                        WebGLRenderingContextBase.UNSIGNED_SHORT,
+                        (uint)(indiceat * sizeof(ushort)));
                 }
                 else
                 {
-                    CanvasHelper.gl.DrawElements(WebGLRenderingContextBase.LINES, m.IndiceCount, WebGLRenderingContextBase.UNSIGNED_SHORT, (uint)(indiceat * sizeof(ushort)));
+                    CanvasHelper.gl.DrawElements(
+                        WebGLRenderingContextBase.LINES,
+                        m.IndiceCount,
+                        WebGLRenderingContextBase.UNSIGNED_SHORT,
+                        (uint)(indiceat * sizeof(ushort)));
                 }
 
                 indiceat += m.IndiceCount;
@@ -207,7 +221,7 @@ namespace Engine
             //DisableVertexAttribArrays();
 
             CanvasHelper.gl.Flush();
-            //CanvasHelper.gl.Finish();
+            CanvasHelper.gl.Finish();
         }
 
         void EnableVertexAttribArrays()
