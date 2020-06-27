@@ -20,10 +20,9 @@ namespace Engine
             Console.WriteLine($"Finished {this} initialization");
         }
 
-        public virtual void Update(float e)
-        {
+        public virtual void Update(float e) { }
 
-        }
+        public virtual void AddMesh() { }
 
 
 

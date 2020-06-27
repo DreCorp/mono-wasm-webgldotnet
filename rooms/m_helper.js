@@ -17,6 +17,7 @@ var App = {
         that.resize = Module.mono_bind_static_method("[rooms] Program:ResizeViewport");
         that.update = Module.mono_bind_static_method("[rooms] Program:Update");
         that.change = Module.mono_bind_static_method("[rooms] Program:ChangeDrawPrimitive");
+        that.add = Module.mono_bind_static_method("[rooms] Program:AddCube");
         that.start();
     }
 };
@@ -40,6 +41,7 @@ window.addEventListener('keydown', (e) => {
     }
 
     if (e.key === 'p') { that.change(); }
+    if (e.key === 'o') { that.add(); }
 
     if (e.key === 'w') { keyspressed.up = true; }
     if (e.key === 's') { keyspressed.down = true; }
@@ -55,7 +57,7 @@ window.addEventListener('keyup', (e) => {
     if (e.key === 'd') { keyspressed.right = false; }
 });
 
-const FPS = 1000.0 / 30.0;// ms / frames doesnt work properly
+const FPS = 1000.0 / 10.0;// ms / frames doesnt work properly
 let lastDrawTime = -1;// in ms
 const initialTime = Date.now();
 var currTime;

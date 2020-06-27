@@ -13,7 +13,7 @@ namespace Engine
     {
         public WebGLBuffer indexBuffer;
         ShaderManager sm;
-        Scene currentScene;
+        public Scene currentScene;
 
         float[] vertData; //data array of vertex positions
         float[] colData;  //data array of vertex colors
@@ -47,10 +47,18 @@ namespace Engine
             sm = new ShaderManager();
 
             currentScene = new TestScene();
+
             AssociateAttribs();
+
             Console.WriteLine($"Finished {this} initialization");
         }
-        void AssociateAttribs()
+
+        public void AddObject()
+        {
+            currentScene.AddMesh();
+            AssociateAttribs();
+        }
+        public void AssociateAttribs()
         {
             verts.Clear();
             colors.Clear();
@@ -147,6 +155,8 @@ namespace Engine
             {
                 currentScene.Update(dTime);
             }
+
+            //AssociateAttribs();
 
             foreach (Mesh m in currentScene.objects)
             {

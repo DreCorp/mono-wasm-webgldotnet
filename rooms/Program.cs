@@ -75,6 +75,11 @@ class Program
     {
         CanvasHelper.drawLines = CanvasHelper.drawLines ? false : true;
     }
+
+    void AddCube()
+    {
+        renderer.AddObject();
+    }
 }
 
 struct KControls

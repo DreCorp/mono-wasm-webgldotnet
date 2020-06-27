@@ -8,8 +8,7 @@ namespace Engine
         public TestScene() : base()
         {
             this.cam.position = new Vector3(0, 0, 10);
-            GenerateTestCubes(50);
-            //GenerateTestQuads(50);
+            GenerateTestCubes(3);
         }
 
         public override void Update(float e)
@@ -169,19 +168,9 @@ namespace Engine
             objects.Add(c4);
         }
 
-        void GenerateCube()
+        public override void AddMesh()
         {
-            Random rand = new Random();
-
-            Cube c = new Cube(new Vector3((float)rand.NextDouble(), (float)rand.NextDouble(), (float)rand.NextDouble()))
-            {
-                Position = new Vector3((float)rand.Next(-10, 10), (float)rand.Next(-10, 10), (float)rand.Next(-10, 10)),
-                Rotation = new Vector3((float)rand.Next(0, 6), (float)rand.Next(0, 6), (float)rand.Next(0, 6)),
-                Scale = Vector3.One * ((float)rand.NextDouble() + 0.2f)
-            };
-
-            objects.Add(c);
+            GenerateTestCube();
         }
-
     }
 }

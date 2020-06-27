@@ -3,8 +3,6 @@
 ## A small experiment using [mono-wasm](https://www.mono-project.com/news/2018/01/16/mono-static-webassembly-compilation/ "mono-wasm") and [WebGLDotNET](https://github.com/WaveEngine/WebGL.NET "WebGLDotNET").
 
 This project initially started as a [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) app, you can see it running [here](https://dwasm.netlify.app).
-However, it quickly became apparent that the framework uses a lot of resources, diminishing WebGL's performance, and [Blazor Canvas](https://github.com/BlazorExtensions/Canvas) library is somewhat [lacking](https://github.com/BlazorExtensions/Canvas/issues) at the moment.
-As a result this project was started.
 
 ***
 
