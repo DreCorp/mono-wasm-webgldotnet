@@ -7,6 +7,7 @@ class Program
 {
     static JSObject window;
     static JSObject canvas;
+    static SceneManager sceneManager;
     static Renderer renderer;
     static KControls kcontrols;
 
@@ -48,7 +49,8 @@ class Program
         CanvasHelper.SetCanvasViewportSize(width, height);
         CanvasHelper.SetClearColor(0.3f, 0.3f, 0.3f);
 
-        renderer = new Renderer();
+        sceneManager = new SceneManager();
+        renderer = new Renderer(sceneManager.currentScene);
 
         kcontrols = new KControls();
 
@@ -56,6 +58,7 @@ class Program
     }
     void Update(JSObject e)
     {
+        sceneManager.currentScene.Update(0.02f);
         renderer.Update(0.02f);
 
         kcontrols.up = (bool)e.GetObjectProperty("up");
@@ -78,7 +81,8 @@ class Program
 
     void AddCube()
     {
-        renderer.AddObject();
+        //renderer.currentScene.AddMesh();
+        //renderer.assocAttribs = true;
     }
 }
 

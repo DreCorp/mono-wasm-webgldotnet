@@ -57,7 +57,7 @@ window.addEventListener('keyup', (e) => {
     if (e.key === 'd') { keyspressed.right = false; }
 });
 
-const FPS = 1000.0 / 10.0;// ms / frames doesnt work properly
+const FPS = 1000.0 / 30.0;// ms / frames doesnt work properly
 let lastDrawTime = -1;// in ms
 const initialTime = Date.now();
 var currTime;

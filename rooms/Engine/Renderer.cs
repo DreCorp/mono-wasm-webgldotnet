@@ -11,9 +11,11 @@ namespace Engine
 {
     public class Renderer : IDisposable
     {
-        public WebGLBuffer indexBuffer;
         ShaderManager sm;
-        public Scene currentScene;
+        Scene currentScene;
+        public bool assocAttribs = false;
+        public WebGLBuffer indexBuffer;
+
 
         float[] vertData; //data array of vertex positions
         float[] colData;  //data array of vertex colors
@@ -27,9 +29,15 @@ namespace Engine
 
         Matrix4x4 view;
         Matrix4x4 tempView;
-        public Renderer()
+
+        public Renderer(Scene scene)
         {
             Console.WriteLine($"Initializing {this}");
+
+            SceneManager.OnSceneChanged += OnSceneChanged;
+
+            currentScene = scene;
+
             CanvasHelper.gl.ClearColor(CanvasHelper.rCol, CanvasHelper.gCol, CanvasHelper.bCol, 1f);
             CanvasHelper.gl.Enable(WebGLRenderingContextBase.DEPTH_TEST);
             CanvasHelper.gl.Enable(WebGLRenderingContextBase.CULL_FACE);
@@ -46,18 +54,11 @@ namespace Engine
 
             sm = new ShaderManager();
 
-            currentScene = new TestScene();
-
             AssociateAttribs();
 
             Console.WriteLine($"Finished {this} initialization");
         }
 
-        public void AddObject()
-        {
-            currentScene.AddMesh();
-            AssociateAttribs();
-        }
         public void AssociateAttribs()
         {
             verts.Clear();
@@ -151,12 +152,11 @@ namespace Engine
         }
         public void Update(float dTime)
         {
-            if (currentScene != null)
+            if (assocAttribs)
             {
-                currentScene.Update(dTime);
+                AssociateAttribs();
+                assocAttribs = false;
             }
-
-            //AssociateAttribs();
 
             foreach (Mesh m in currentScene.objects)
             {
@@ -247,6 +247,11 @@ namespace Engine
             {
                 CanvasHelper.gl.DisableVertexAttribArray(sm.mShader.attribs.Values.ElementAt(i).address);
             }
+        }
+
+        void OnSceneChanged(Scene newScene)
+        {
+
         }
 
         public void Dispose()

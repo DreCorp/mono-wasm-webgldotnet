@@ -22,6 +22,7 @@ Engine/ShaderManager.cs \
 Engine/ShaderProgram.cs \
 Engine/ShaderStrings.cs \
 Engine/Utils.cs \
+Engine/Scenes/SceneManager.cs \
 Engine/Scenes/Scene.cs \
 Engine/Scenes/TestScene.cs \
 Engine/Shapes/Cube.cs \
