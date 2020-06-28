@@ -36,22 +36,9 @@ class Program
             canvas.SetObjectProperty("height", height);
         }
 
-        CanvasHelper.canvasWidth = width;
-        CanvasHelper.canvasHeight = height;
-
-        CanvasHelper.light.direction = new float[] { 0.0f, 0.0f, 40.0f };
-        CanvasHelper.light.ambientIntensity = 1f;
-        CanvasHelper.light.diffuseIntensity = 1f;
-        CanvasHelper.drawLines = false;
-
-        CanvasHelper.gl = new WebGLRenderingContext(canvas, contextAttributes);
-        CanvasHelper.light.color = new float[] { 0.9f, 0.9f, 0.9f };
-        CanvasHelper.SetCanvasViewportSize(width, height);
-        CanvasHelper.SetClearColor(0.3f, 0.3f, 0.3f);
-
         sceneManager = new SceneManager();
-        renderer = new Renderer(sceneManager.currentScene);
-
+        renderer = new Renderer(new WebGLRenderingContext(canvas, contextAttributes), width, height, sceneManager.currentScene);
+        renderer.ChangeViewPortSize(width, height);
         kcontrols = new KControls();
 
         window.Invoke("update_game");
@@ -71,12 +58,12 @@ class Program
 
     void ResizeViewport(int w, int h)
     {
-        CanvasHelper.SetCanvasViewportSize(w, h);
+        renderer.ChangeViewPortSize(w, h);
     }
 
     void ChangeDrawPrimitive()
     {
-        CanvasHelper.drawLines = CanvasHelper.drawLines ? false : true;
+        renderer.drawLines = renderer.drawLines ? false : true;
     }
 
     void AddCube()

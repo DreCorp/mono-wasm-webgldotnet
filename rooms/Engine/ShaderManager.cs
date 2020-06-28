@@ -5,14 +5,16 @@ namespace Engine
 {
     public class ShaderManager
     {
+        WebGLRenderingContext gl;
         public ShaderProgram mShader;
 
         public string vs { get; set; }
         public string fs { get; set; }
 
-        public ShaderManager()
+        public ShaderManager(WebGLRenderingContext _gl)
         {
             Console.WriteLine($"Initializing {this}");
+            gl = _gl;
             LoadShader();
             Console.WriteLine($"Finished {this} initialization");
         }
@@ -27,26 +29,26 @@ namespace Engine
 
         private void InitProgram(ShaderProgram program, string _vs, string _fs)
         {
-            program.prog = CanvasHelper.gl.CreateProgram();
+            program.prog = gl.CreateProgram();
 
-            program.vs = CanvasHelper.gl.CreateShader(WebGLRenderingContextBase.VERTEX_SHADER);
-            program.fs = CanvasHelper.gl.CreateShader(WebGLRenderingContextBase.FRAGMENT_SHADER);
+            program.vs = gl.CreateShader(WebGLRenderingContextBase.VERTEX_SHADER);
+            program.fs = gl.CreateShader(WebGLRenderingContextBase.FRAGMENT_SHADER);
 
-            CanvasHelper.gl.ShaderSource(program.vs, _vs);
-            CanvasHelper.gl.ShaderSource(program.fs, _fs);
+            gl.ShaderSource(program.vs, _vs);
+            gl.ShaderSource(program.fs, _fs);
 
-            CanvasHelper.gl.CompileShader(program.vs);
-            CanvasHelper.gl.CompileShader(program.fs);
+            gl.CompileShader(program.vs);
+            gl.CompileShader(program.fs);
 
-            CanvasHelper.gl.AttachShader(program.prog, program.vs);
-            CanvasHelper.gl.AttachShader(program.prog, program.fs);
+            gl.AttachShader(program.prog, program.vs);
+            gl.AttachShader(program.prog, program.fs);
 
             int attShaders =
-                (int)CanvasHelper.gl.GetProgramParameter(program.prog, WebGLRenderingContextBase.ATTACHED_SHADERS);
+                (int)gl.GetProgramParameter(program.prog, WebGLRenderingContextBase.ATTACHED_SHADERS);
             Console.WriteLine($"{this}: Shaders attached: {attShaders}");
 
-            bool vsComp = (bool)CanvasHelper.gl.GetShaderParameter(program.vs, WebGLRenderingContextBase.COMPILE_STATUS);
-            bool fsComp = (bool)CanvasHelper.gl.GetShaderParameter(program.fs, WebGLRenderingContextBase.COMPILE_STATUS);
+            bool vsComp = (bool)gl.GetShaderParameter(program.vs, WebGLRenderingContextBase.COMPILE_STATUS);
+            bool fsComp = (bool)gl.GetShaderParameter(program.fs, WebGLRenderingContextBase.COMPILE_STATUS);
 
             Console.WriteLine($"{this}: Vertex shader compile status: {vsComp}");
             Console.WriteLine($"{this}: Fragment shader compile status: {fsComp}");
@@ -56,58 +58,58 @@ namespace Engine
 
         private void LinkProgram(ShaderProgram program)
         {
-            CanvasHelper.gl.LinkProgram(program.prog);
-            CanvasHelper.gl.ValidateProgram(program.prog);
+            gl.LinkProgram(program.prog);
+            gl.ValidateProgram(program.prog);
 
             bool linkStatus =
-                (bool)CanvasHelper.gl.GetProgramParameter(program.prog, WebGLRenderingContextBase.LINK_STATUS);
+                (bool)gl.GetProgramParameter(program.prog, WebGLRenderingContextBase.LINK_STATUS);
             bool validateStatus =
-                (bool)CanvasHelper.gl.GetProgramParameter(program.prog, WebGLRenderingContextBase.VALIDATE_STATUS);
+                (bool)gl.GetProgramParameter(program.prog, WebGLRenderingContextBase.VALIDATE_STATUS);
 
             Console.WriteLine($"{this}: Shader program Link status: {linkStatus}");
             Console.WriteLine($"{this}: Shader program Validate status: {validateStatus}");
 
             int attribCount =
-                (int)CanvasHelper.gl.GetProgramParameter(program.prog, WebGLRenderingContextBase.ACTIVE_ATTRIBUTES);
+                (int)gl.GetProgramParameter(program.prog, WebGLRenderingContextBase.ACTIVE_ATTRIBUTES);
 
             int uniformCount =
-                (int)CanvasHelper.gl.GetProgramParameter(program.prog, WebGLRenderingContextBase.ACTIVE_UNIFORMS);
+                (int)gl.GetProgramParameter(program.prog, WebGLRenderingContextBase.ACTIVE_UNIFORMS);
 
             Console.WriteLine($"Shader program has {attribCount} attributes, {uniformCount} uniforms.");
 
 
             for (uint i = 0; i < attribCount; i++)
             {
-                WebGLActiveInfo ai = CanvasHelper.gl.GetActiveAttrib(program.prog, i);
+                WebGLActiveInfo ai = gl.GetActiveAttrib(program.prog, i);
                 Console.WriteLine($"Attribute {i} Name: {ai.Name}, Size: {ai.Size}, Type: {ai.Type}");
                 GenerateAttribute(program, ai.Name);
             }
 
             for (uint i = 0; i < uniformCount; i++)
             {
-                WebGLActiveInfo ai = CanvasHelper.gl.GetActiveUniform(program.prog, i);
+                WebGLActiveInfo ai = gl.GetActiveUniform(program.prog, i);
                 Console.WriteLine($"Uniform {i} Name: {ai.Name}, Size: {ai.Size}, Type: {ai.Type}");
                 GenerateUniform(program, ai.Name);
             }
 
-            CanvasHelper.gl.UseProgram(program.prog);
+            gl.UseProgram(program.prog);
 
-            CanvasHelper.gl.DeleteShader(program.vs);
-            CanvasHelper.gl.DeleteShader(program.fs);
+            gl.DeleteShader(program.vs);
+            gl.DeleteShader(program.fs);
 
-            CanvasHelper.gl.DeleteProgram(program.prog);
+            gl.DeleteProgram(program.prog);
         }
 
         void GenerateAttribute(ShaderProgram program, string _name)
         {
             AttributeInfo info = new AttributeInfo();
             info.name = _name;
-            int addr = CanvasHelper.gl.GetAttribLocation(program.prog, _name);
+            int addr = gl.GetAttribLocation(program.prog, _name);
             info.address = (uint)addr;
 
             program.attribs.Add(info.name, info);
 
-            program.buffers.Add(_name, CanvasHelper.gl.CreateBuffer());
+            program.buffers.Add(_name, gl.CreateBuffer());
         }
 
         void GenerateUniform(ShaderProgram program, string _name)
@@ -115,11 +117,11 @@ namespace Engine
             UniformInfo info = new UniformInfo();
 
             info.name = _name;
-            info.address = CanvasHelper.gl.GetUniformLocation(program.prog, _name);
+            info.address = gl.GetUniformLocation(program.prog, _name);
 
             program.uniforms.Add(info.name, info);
 
-            program.buffers.Add(_name, CanvasHelper.gl.CreateBuffer());
+            program.buffers.Add(_name, gl.CreateBuffer());
         }
 
         public int GetAttribute(ShaderProgram program, string _name)

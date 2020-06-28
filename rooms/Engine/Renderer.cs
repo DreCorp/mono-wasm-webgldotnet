@@ -11,9 +11,15 @@ namespace Engine
 {
     public class Renderer : IDisposable
     {
+        public bool drawLines = false;
+        public bool assocAttribs = false;
+
+        public int canvasWidth = 100;
+        public int canvasHeight = 100;
+        WebGLRenderingContext gl;
         ShaderManager sm;
         Scene currentScene;
-        public bool assocAttribs = false;
+
         public WebGLBuffer indexBuffer;
 
 
@@ -30,7 +36,9 @@ namespace Engine
         Matrix4x4 view;
         Matrix4x4 tempView;
 
-        public Renderer(Scene scene)
+
+
+        public Renderer(WebGLRenderingContext _mgl, int cw, int ch, Scene scene)
         {
             Console.WriteLine($"Initializing {this}");
 
@@ -38,21 +46,25 @@ namespace Engine
 
             currentScene = scene;
 
-            CanvasHelper.gl.ClearColor(CanvasHelper.rCol, CanvasHelper.gCol, CanvasHelper.bCol, 1f);
-            CanvasHelper.gl.Enable(WebGLRenderingContextBase.DEPTH_TEST);
-            CanvasHelper.gl.Enable(WebGLRenderingContextBase.CULL_FACE);
-            CanvasHelper.gl.CullFace(WebGLRenderingContextBase.BACK);
+            gl = _mgl;
+            canvasWidth = cw;
+            canvasHeight = ch;
 
-            CanvasHelper.gl.Disable(WebGLRenderingContextBase.DITHER);
-            CanvasHelper.gl.Disable(WebGLRenderingContextBase.STENCIL_TEST);
-            CanvasHelper.gl.Disable(WebGLRenderingContextBase.POLYGON_OFFSET_FILL);
-            CanvasHelper.gl.Disable(WebGLRenderingContextBase.SAMPLE_ALPHA_TO_COVERAGE);
-            CanvasHelper.gl.Disable(WebGLRenderingContextBase.SAMPLE_COVERAGE);
-            CanvasHelper.gl.Disable(WebGLRenderingContextBase.SCISSOR_TEST);
+            gl.ClearColor(currentScene.bgColor.X, currentScene.bgColor.Y, currentScene.bgColor.Z, 1.0f);
+            gl.Enable(WebGLRenderingContextBase.DEPTH_TEST);
+            gl.Enable(WebGLRenderingContextBase.CULL_FACE);
+            gl.CullFace(WebGLRenderingContextBase.BACK);
 
-            indexBuffer = CanvasHelper.gl.CreateBuffer();
+            gl.Disable(WebGLRenderingContextBase.DITHER);
+            gl.Disable(WebGLRenderingContextBase.STENCIL_TEST);
+            gl.Disable(WebGLRenderingContextBase.POLYGON_OFFSET_FILL);
+            gl.Disable(WebGLRenderingContextBase.SAMPLE_ALPHA_TO_COVERAGE);
+            gl.Disable(WebGLRenderingContextBase.SAMPLE_COVERAGE);
+            gl.Disable(WebGLRenderingContextBase.SCISSOR_TEST);
 
-            sm = new ShaderManager();
+            indexBuffer = gl.CreateBuffer();
+
+            sm = new ShaderManager(gl);
 
             AssociateAttribs();
 
@@ -85,16 +97,16 @@ namespace Engine
 
             if (sm.GetAttribute(sm.mShader, "vPos") != -1)
             {
-                CanvasHelper.gl.BindBuffer(
+                gl.BindBuffer(
                     WebGLRenderingContextBase.ARRAY_BUFFER,
                     sm.mShader.buffers["vPos"]);
 
-                CanvasHelper.gl.BufferData(
+                gl.BufferData(
                     WebGLRenderingContextBase.ARRAY_BUFFER,
                     vertData,
                     WebGLRenderingContextBase.STATIC_DRAW);
 
-                CanvasHelper.gl.VertexAttribPointer(
+                gl.VertexAttribPointer(
                     (uint)sm.GetAttribute(sm.mShader, "vPos"),
                     3,
                     WebGLRenderingContextBase.FLOAT,
@@ -105,16 +117,16 @@ namespace Engine
 
             if (sm.GetAttribute(sm.mShader, "vColor") != -1)
             {
-                CanvasHelper.gl.BindBuffer(
+                gl.BindBuffer(
                     WebGLRenderingContextBase.ARRAY_BUFFER,
                     sm.mShader.buffers["vColor"]);
 
-                CanvasHelper.gl.BufferData(
+                gl.BufferData(
                     WebGLRenderingContextBase.ARRAY_BUFFER,
                     colData,
                     WebGLRenderingContextBase.STATIC_DRAW);
 
-                CanvasHelper.gl.VertexAttribPointer(
+                gl.VertexAttribPointer(
                     (uint)sm.GetAttribute(sm.mShader, "vColor"),
                     3,
                     WebGLRenderingContextBase.FLOAT,
@@ -125,16 +137,16 @@ namespace Engine
 
             if (sm.GetAttribute(sm.mShader, "vNormal") != -1)
             {
-                CanvasHelper.gl.BindBuffer(
+                gl.BindBuffer(
                     WebGLRenderingContextBase.ARRAY_BUFFER,
                     sm.mShader.buffers["vNormal"]);
 
-                CanvasHelper.gl.BufferData(
+                gl.BufferData(
                     WebGLRenderingContextBase.ARRAY_BUFFER,
                     normalData,
                     WebGLRenderingContextBase.STATIC_DRAW);
 
-                CanvasHelper.gl.VertexAttribPointer(
+                gl.VertexAttribPointer(
                     (uint)sm.GetAttribute(sm.mShader, "vNormal"),
                     3,
                     WebGLRenderingContextBase.FLOAT,
@@ -143,9 +155,9 @@ namespace Engine
                     0);
             }
 
-            CanvasHelper.gl.BindBuffer(
+            gl.BindBuffer(
                 WebGLRenderingContextBase.ELEMENT_ARRAY_BUFFER, indexBuffer);
-            CanvasHelper.gl.BufferData(
+            gl.BufferData(
                 WebGLRenderingContextBase.ELEMENT_ARRAY_BUFFER,
                 indiceData,
                 WebGLRenderingContextBase.STATIC_DRAW);
@@ -163,7 +175,7 @@ namespace Engine
                 m.CalculateModelMatrix();
 
                 m.ViewProjectionMatrix = currentScene.cam.GetViewMatrix() *
-                    Matrix4x4.CreatePerspectiveFieldOfView(1.3f, CanvasHelper.canvasWidth / (float)CanvasHelper.canvasHeight, 0.1f, 50.0f);
+                    Matrix4x4.CreatePerspectiveFieldOfView(1.3f, canvasWidth / (float)canvasHeight, 0.1f, 50.0f);
 
                 m.ModelViewProjectionMatrix = m.modelMatrix * m.ViewProjectionMatrix;
             }
@@ -178,7 +190,7 @@ namespace Engine
         public void Render()
         {
 
-            CanvasHelper.gl.Clear(WebGLRenderingContextBase.COLOR_BUFFER_BIT | WebGLRenderingContextBase.DEPTH_BUFFER_BIT);
+            gl.Clear(WebGLRenderingContextBase.COLOR_BUFFER_BIT | WebGLRenderingContextBase.DEPTH_BUFFER_BIT);
 
             EnableVertexAttribArrays();
 
@@ -186,31 +198,31 @@ namespace Engine
 
             foreach (Mesh m in currentScene.objects)
             {
-                CanvasHelper.gl.UniformMatrix4fv(
+                gl.UniformMatrix4fv(
                     sm.GetUniform(sm.mShader, "modelview"),
                     false,
                     MathHelper.Mat4ToFloatArray(m.ModelViewProjectionMatrix));
 
-                CanvasHelper.gl.UniformMatrix4fv(
+                gl.UniformMatrix4fv(
                     sm.GetUniform(sm.mShader, "view"),
                     false,
                     MathHelper.Mat4ToFloatArray(view));
 
 
-                CanvasHelper.gl.UniformMatrix4fv(
+                gl.UniformMatrix4fv(
                     sm.GetUniform(sm.mShader, "model"),
                     false,
                     MathHelper.Mat4ToFloatArray(m.modelMatrix));
 
 
-                CanvasHelper.gl.Uniform3fv(sm.GetUniform(sm.mShader, "lightDir"), CanvasHelper.light.direction);
-                CanvasHelper.gl.Uniform3fv(sm.GetUniform(sm.mShader, "lightColor"), CanvasHelper.light.color);
-                CanvasHelper.gl.Uniform1f(sm.GetUniform(sm.mShader, "lightAmbientIntens"), CanvasHelper.light.ambientIntensity);
-                CanvasHelper.gl.Uniform1f(sm.GetUniform(sm.mShader, "lightDiffuseIntens"), CanvasHelper.light.diffuseIntensity);
+                gl.Uniform3fv(sm.GetUniform(sm.mShader, "lightDir"), currentScene.light.direction);
+                gl.Uniform3fv(sm.GetUniform(sm.mShader, "lightColor"), currentScene.light.color);
+                gl.Uniform1f(sm.GetUniform(sm.mShader, "lightAmbientIntens"), currentScene.light.ambientIntensity);
+                gl.Uniform1f(sm.GetUniform(sm.mShader, "lightDiffuseIntens"), currentScene.light.diffuseIntensity);
 
-                if (!CanvasHelper.drawLines)
+                if (!drawLines)
                 {
-                    CanvasHelper.gl.DrawElements(
+                    gl.DrawElements(
                         WebGLRenderingContextBase.TRIANGLES,
                         m.IndiceCount,
                         WebGLRenderingContextBase.UNSIGNED_SHORT,
@@ -218,7 +230,7 @@ namespace Engine
                 }
                 else
                 {
-                    CanvasHelper.gl.DrawElements(
+                    gl.DrawElements(
                         WebGLRenderingContextBase.LINES,
                         m.IndiceCount,
                         WebGLRenderingContextBase.UNSIGNED_SHORT,
@@ -230,23 +242,31 @@ namespace Engine
 
             //DisableVertexAttribArrays();
 
-            CanvasHelper.gl.Flush();
-            CanvasHelper.gl.Finish();
+            gl.Flush();
+            gl.Finish();
         }
 
         void EnableVertexAttribArrays()
         {
             for (int i = 0; i < sm.mShader.attribs.Count; i++)
             {
-                CanvasHelper.gl.EnableVertexAttribArray(sm.mShader.attribs.Values.ElementAt(i).address);
+                gl.EnableVertexAttribArray(sm.mShader.attribs.Values.ElementAt(i).address);
             }
         }
         void DisableVertexAttribArrays()
         {
             for (int i = 0; i < sm.mShader.attribs.Count; i++)
             {
-                CanvasHelper.gl.DisableVertexAttribArray(sm.mShader.attribs.Values.ElementAt(i).address);
+                gl.DisableVertexAttribArray(sm.mShader.attribs.Values.ElementAt(i).address);
             }
+        }
+
+        public void ChangeViewPortSize(int w, int h)
+        {
+            canvasWidth = w;
+            canvasHeight = h;
+
+            gl.Viewport(0, 0, w, h);
         }
 
         void OnSceneChanged(Scene newScene)
@@ -274,7 +294,7 @@ namespace Engine
                 handle.Dispose();
                 // Free any other managed objects here.
                 //
-                CanvasHelper.gl.Dispose();
+                gl.Dispose();
 
             }
 
