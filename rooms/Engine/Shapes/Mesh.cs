@@ -1,4 +1,4 @@
-using System.Numerics;
+using OpenToolkit.Mathematics;
 
 namespace Engine
 {
@@ -12,10 +12,10 @@ namespace Engine
         public virtual int IndiceCount { get; set; }
         public virtual int ColorDataCount { get; set; }
 
-        public Matrix4x4 modelMatrix = Matrix4x4.Identity;
-        public Matrix4x4 tempModelMatrix = Matrix4x4.Identity;
-        public Matrix4x4 ViewProjectionMatrix = Matrix4x4.Identity;
-        public Matrix4x4 ModelViewProjectionMatrix = Matrix4x4.Identity;
+        public Matrix4 modelMatrix = Matrix4.Identity;
+        public Matrix4 tempModelMatrix = Matrix4.Identity;
+        public Matrix4 ViewProjectionMatrix = Matrix4.Identity;
+        public Matrix4 ModelViewProjectionMatrix = Matrix4.Identity;
         public abstract float[] GetVerts();
         public abstract ushort[] GetIndices(int offset = 0);
 
@@ -23,11 +23,11 @@ namespace Engine
 
         public void CalculateModelMatrix()
         {
-            modelMatrix = Matrix4x4.CreateScale(Scale)
-           * Matrix4x4.CreateRotationX(Rotation.X)
-           * Matrix4x4.CreateRotationY(Rotation.Y)
-           * Matrix4x4.CreateRotationZ(Rotation.Z)
-           * Matrix4x4.CreateTranslation(Position);
+            modelMatrix = Matrix4.CreateScale(Scale)
+           * Matrix4.CreateRotationX(Rotation.X)
+           * Matrix4.CreateRotationY(Rotation.Y)
+           * Matrix4.CreateRotationZ(Rotation.Z)
+           * Matrix4.CreateTranslation(Position);
         }
         public abstract float[] GetColorData();
 

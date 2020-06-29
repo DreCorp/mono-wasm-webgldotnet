@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 using WebGLDotNET;
-using System.Numerics;
+using OpenToolkit.Mathematics;
 
 
 namespace Engine
@@ -14,15 +14,12 @@ namespace Engine
         public bool drawLines = false;
         public bool assocAttribs = false;
 
-        public int canvasWidth = 100;
-        public int canvasHeight = 100;
+        int canvasWidth = 100;
+        int canvasHeight = 100;
         WebGLRenderingContext gl;
         ShaderManager sm;
         Scene currentScene;
-
-        public WebGLBuffer indexBuffer;
-
-
+        WebGLBuffer indexBuffer;
         float[] vertData; //data array of vertex positions
         float[] colData;  //data array of vertex colors
         ushort[] indiceData;
@@ -33,11 +30,7 @@ namespace Engine
         List<float> colors = new List<float>();
         List<float> normals = new List<float>();
 
-        Matrix4x4 view;
-        Matrix4x4 tempView;
-
-
-
+        Matrix4 view;
         public Renderer(WebGLRenderingContext _mgl, int cw, int ch, Scene scene)
         {
             Console.WriteLine($"Initializing {this}");
@@ -162,6 +155,7 @@ namespace Engine
                 indiceData,
                 WebGLRenderingContextBase.STATIC_DRAW);
         }
+
         public void Update(float dTime)
         {
             if (assocAttribs)
@@ -175,14 +169,13 @@ namespace Engine
                 m.CalculateModelMatrix();
 
                 m.ViewProjectionMatrix = currentScene.cam.GetViewMatrix() *
-                    Matrix4x4.CreatePerspectiveFieldOfView(1.3f, canvasWidth / (float)canvasHeight, 0.1f, 50.0f);
+                    Matrix4.CreatePerspectiveFieldOfView(1.3f, canvasWidth / (float)canvasHeight, 0.1f, 50.0f);
 
                 m.ModelViewProjectionMatrix = m.modelMatrix * m.ViewProjectionMatrix;
             }
-            //view = currentScene.cam.GetViewMatrix();
 
-            tempView = currentScene.cam.GetViewMatrix();
-            System.Numerics.Matrix4x4.Invert(tempView, out view);
+
+            view = currentScene.cam.GetViewMatrix();
 
             Render();
         }

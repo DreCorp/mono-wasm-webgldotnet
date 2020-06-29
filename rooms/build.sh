@@ -9,12 +9,11 @@ mcs /target:library \
 /r:$WASM_SDK/wasm-bcl/wasm/System.Core.dll \
 /r:$WASM_SDK/wasm-bcl/wasm/Facades/netstandard.dll \
 /r:$WASM_SDK/wasm-bcl/wasm/System.Net.Http.dll \
-/r:$WASM_SDK/wasm-bcl/wasm/System.Numerics.dll \
 /r:$WASM_SDK/framework/WebAssembly.Bindings.dll \
 /r:WebGLDotNET.dll \
+/r:OpenToolkit.Mathematics.dll \
 Program.cs \
 Engine/Camera.cs \
-Engine/CanvasHelper.cs \
 Engine/Light.cs \
 Engine/MathHelper.cs \
 Engine/Renderer.cs \

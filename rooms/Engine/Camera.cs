@@ -1,5 +1,5 @@
 using System;
-using System.Numerics;
+using OpenToolkit.Mathematics;
 
 
 namespace Engine
@@ -11,7 +11,7 @@ namespace Engine
         public float moveSpeed = 0.2f;
         public float mouseSens = 0.0125f;
 
-        public Matrix4x4 GetViewMatrix()
+        public Matrix4 GetViewMatrix()
         {
             Vector3 lookAt = new Vector3()
             {
@@ -20,7 +20,7 @@ namespace Engine
                 Z = (float)(Math.Cos((float)orientation.X) * Math.Cos((float)orientation.Y))
             };
 
-            return Matrix4x4.CreateLookAt(position, position + lookAt, Vector3.UnitY);
+            return Matrix4.LookAt(position, position + lookAt, Vector3.UnitY);
         }
 
         public void Move(float x, float y, float z)

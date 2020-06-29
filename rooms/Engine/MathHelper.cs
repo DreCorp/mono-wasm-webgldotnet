@@ -1,7 +1,4 @@
-//using OpenTK;
-using System.Collections.Generic;
-using System;
-using System.Numerics;
+using OpenToolkit.Mathematics;
 
 namespace Engine
 {
@@ -36,7 +33,7 @@ namespace Engine
         }
 
         static float[] m = new float[16];
-        public static float[] Mat4ToFloatArray(Matrix4x4 mat)
+        public static float[] Mat4ToFloatArray(Matrix4 mat)
         {
             m[0] = mat.M11;
             m[1] = mat.M12;
@@ -71,10 +68,5 @@ namespace Engine
             */
         }
 
-        public static float[] Mat4IdToFloatArray()
-        {
-            Matrix4x4 mat = Matrix4x4.Identity;
-            return Mat4ToFloatArray(mat);
-        }
     }
 }

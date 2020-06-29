@@ -1,5 +1,5 @@
 using System;
-using System.Numerics;
+using OpenToolkit.Mathematics;
 
 namespace Engine
 {
@@ -7,7 +7,7 @@ namespace Engine
     {
         public TestScene() : base()
         {
-            this.cam.position = new Vector3(0, 0, 10);
+            this.cam.position = new Vector3(0f, 0f, 10f);
             GenerateTestCubes(3);
         }
 

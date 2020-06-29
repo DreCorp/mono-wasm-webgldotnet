@@ -1,6 +1,6 @@
 # ROOMS
  
-## A small experiment using [mono-wasm](https://www.mono-project.com/news/2018/01/16/mono-static-webassembly-compilation/ "mono-wasm") and [WebGLDotNET](https://github.com/WaveEngine/WebGL.NET "WebGLDotNET").
+## A rudimentary experiment using [mono-wasm](https://www.mono-project.com/news/2018/01/16/mono-static-webassembly-compilation/ "mono-wasm") and [WebGLDotNET](https://github.com/WaveEngine/WebGL.NET "WebGLDotNET").
 
 This project initially started as a [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) app, you can see it running [here](https://dwasm.netlify.app).
 
@@ -30,7 +30,7 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * Define a variable called `$WASM_SDK`. For example: `$WASM_SDK="/path/to_wasm_sdk/"`. Dont forget the trailing slash.
 
-* Add compiled `WebGLDotNET.dll` binary to the `rooms` folder. At the moment you will need to compile it yourself.
+* Add compiled `WebGLDotNET.dll` and `OpenToolkit.Mathematics.dll` binaries to the `rooms` folder. At the moment you will need to compile them yourself. You can simply add relevevant references to `.csproj` run `dotnet build`.
 
 * Run `"compile"` command from `build.sh` in the `rooms` folder.
 
