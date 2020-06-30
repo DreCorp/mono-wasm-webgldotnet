@@ -24,10 +24,12 @@ Engine/Utils.cs \
 Engine/Scenes/SceneManager.cs \
 Engine/Scenes/Scene.cs \
 Engine/Scenes/TestScene.cs \
-Engine/Shapes/Cube.cs \
-Engine/Shapes/Mesh.cs \
-Engine/Shapes/Quad.cs \
-Engine/Shapes/Sube.cs \
+Engine/Geometry/Color.cs \
+Engine/Geometry/Cube.cs \
+Engine/Geometry/Mesh.cs \
+Engine/Geometry/Point.cs \
+Engine/Geometry/Quad.cs \
+Engine/Geometry/Sube.cs \
 && 
 #"publish" command:
 mono $WASM_SDK/packager.exe \
