@@ -18,6 +18,7 @@ namespace Engine
         int canvasHeight = 100;
         WebGLRenderingContext gl;
         ShaderManager sm;
+        ContentManager cm;
         Scene currentScene;
         WebGLBuffer indexBuffer;
         float[] vertData; //data array of vertex positions
@@ -60,6 +61,9 @@ namespace Engine
             indexBuffer = gl.CreateBuffer();
 
             sm = new ShaderManager(gl);
+            cm = new ContentManager();
+
+            cm.LoadImage(gl);
 
             AssociateAttribs();
 
@@ -91,6 +95,7 @@ namespace Engine
             colData = colors.ToArray();
             indiceData = inds.ToArray();
             normalData = normals.ToArray();
+            textureData = texCoords.ToArray();
 
             if (sm.GetAttribute(sm.mShader, "vPos") != -1)
             {
@@ -152,6 +157,26 @@ namespace Engine
                     0);
             }
 
+            if (sm.GetAttribute(sm.mShader, "texCoord") != -1)
+            {
+                gl.BindBuffer(
+                    WebGLRenderingContext.ARRAY_BUFFER,
+                    sm.mShader.buffers["texCoord"]);
+
+                gl.BufferData(
+                    WebGLRenderingContext.ARRAY_BUFFER,
+                    textureData,
+                    WebGLRenderingContext.STATIC_DRAW);
+
+                gl.VertexAttribPointer(
+                    (uint)sm.GetAttribute(sm.mShader, "texCoord"),
+                    2,
+                    WebGLRenderingContext.FLOAT,
+                    false,
+                    2 * sizeof(float),
+                    0);
+            }
+
             gl.BindBuffer(
                 WebGLRenderingContextBase.ELEMENT_ARRAY_BUFFER, indexBuffer);
             gl.BufferData(
@@ -195,11 +220,16 @@ namespace Engine
 
             foreach (Mesh m in currentScene.objects)
             {
+
                 gl.UniformMatrix4fv(
                     sm.GetUniform(sm.mShader, "modelview"),
                     false,
                     MathHelper.Mat4ToFloatArray(m.ModelViewProjectionMatrix));
-
+                /*
+                gl.Uniform1i(
+                    sm.GetUniform(sm.mShader, "maintexture"),
+                    m.textureId);
+*/
                 gl.UniformMatrix4fv(
                     sm.GetUniform(sm.mShader, "view"),
                     false,
@@ -216,6 +246,14 @@ namespace Engine
                 gl.Uniform3fv(sm.GetUniform(sm.mShader, "lightColor"), currentScene.light.color);
                 gl.Uniform1f(sm.GetUniform(sm.mShader, "lightAmbientIntens"), currentScene.light.ambientIntensity);
                 gl.Uniform1f(sm.GetUniform(sm.mShader, "lightDiffuseIntens"), currentScene.light.diffuseIntensity);
+
+
+                gl.ActiveTexture(WebGLRenderingContextBase.TEXTURE0);
+                gl.BindTexture(WebGLRenderingContextBase.TEXTURE_2D, cm.texture1);
+                gl.Uniform1i(sm.GetUniform(sm.mShader, "maintexture"), 0);
+
+
+
 
                 if (!drawLines)
                 {

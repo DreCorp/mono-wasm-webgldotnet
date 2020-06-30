@@ -2,6 +2,38 @@ namespace Engine
 {
     public static class ShaderStrings
     {
+
+        public const string basic_tex_vert_shader = @"
+            
+            precision lowp float;
+            
+            attribute vec3 vPos;
+            attribute vec2 texCoord;
+
+            uniform mat4 modelview;
+
+            varying vec2 fTexCoord;
+
+            void main(){
+                gl_Position = modelview * vec4(vPos, 1.0);
+                fTexCoord = texCoord;
+            }
+        ";
+
+        public const string basic_tex_frag_shader = @"
+            precision lowp float;
+
+            varying vec2 fTexCoord;
+
+            uniform sampler2D maintexture;
+
+            void main(){
+                vec2 flipped = vec2(fTexCoord.x, 1.0 - fTexCoord.y);
+                gl_FragColor = texture2D(maintexture, flipped);
+            }
+        ";
+
+
         public const string directional_vertex_shader = @"
 
             precision lowp float;

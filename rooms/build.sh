@@ -14,17 +14,18 @@ mcs /target:library \
 /r:OpenToolkit.Mathematics.dll \
 Program.cs \
 Engine/Camera.cs \
+Engine/Color.cs \
+Engine/ContentManager.cs \
 Engine/Light.cs \
 Engine/MathHelper.cs \
 Engine/Renderer.cs \
-Engine/ShaderManager.cs \
-Engine/ShaderProgram.cs \
-Engine/ShaderStrings.cs \
+Engine/Shaders/ShaderManager.cs \
+Engine/Shaders/ShaderProgram.cs \
+Engine/Shaders/ShaderStrings.cs \
 Engine/Utils.cs \
 Engine/Scenes/SceneManager.cs \
 Engine/Scenes/Scene.cs \
 Engine/Scenes/TestScene.cs \
-Engine/Geometry/Color.cs \
 Engine/Geometry/Cube.cs \
 Engine/Geometry/Mesh.cs \
 Engine/Geometry/Point.cs \
@@ -37,4 +38,6 @@ mono $WASM_SDK/packager.exe \
 --out=./publish \
 --asset=./index.html \
 --asset=./m_helper.js \
+--asset=./Assets/PlainConcepts.png \
+--asset=./Assets/opentksquare.png \
 rooms.dll

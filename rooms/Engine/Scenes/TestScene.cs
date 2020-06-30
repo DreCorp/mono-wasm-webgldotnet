@@ -8,9 +8,8 @@ namespace Engine
         public TestScene() : base()
         {
             this.cam.position = new Vector3(0f, 0f, 10f);
-            //GenerateTestCubes(3);
-            GenerateTestQuads(50);
-
+            GenerateTestCubes();
+            //GenerateTestQuads(50);
         }
 
         public override void Update(float e)
