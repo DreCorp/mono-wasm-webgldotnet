@@ -37,7 +37,7 @@ namespace Engine
         public int textureId;
         public virtual int TextureCoordCount { get; set; }
 
-        public abstract Vector2[] GetTextureCoords();
+        public abstract float[] GetTextureCoords();
 
         public float[] normals;
         //public virtual int NormalCount { get { return normals.Length; } }

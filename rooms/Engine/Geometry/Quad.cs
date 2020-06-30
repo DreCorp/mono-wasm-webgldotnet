@@ -71,14 +71,14 @@ namespace Engine
             return verts;
         }
 
-        public override Vector2[] GetTextureCoords()
+        public override float[] GetTextureCoords()
         {
-            return new Vector2[]
+            return new float[]
             {
-                new Vector2(0f,0f),
-                new Vector2(-1f,1f),
-                new Vector2(-1f,0f),
-                new Vector2(0f,1f),
+                0f,0f,
+                -1f,1f,
+                -1f,0f,
+                0f,1f,
             };
         }
     }

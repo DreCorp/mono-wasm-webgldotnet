@@ -24,11 +24,13 @@ namespace Engine
         float[] colData;  //data array of vertex colors
         ushort[] indiceData;
         float[] normalData;
+        float[] textureData;
 
         List<float> verts = new List<float>();
         List<ushort> inds = new List<ushort>();
         List<float> colors = new List<float>();
         List<float> normals = new List<float>();
+        List<float> texCoords = new List<float>();
 
         Matrix4 view;
         public Renderer(WebGLRenderingContext _mgl, int cw, int ch, Scene scene)
@@ -70,6 +72,7 @@ namespace Engine
             colors.Clear();
             inds.Clear();
             normals.Clear();
+            texCoords.Clear();
 
             int vertCount = 0;
 
@@ -79,6 +82,7 @@ namespace Engine
                 inds.AddRange(m.GetIndices(vertCount).ToList());
                 colors.AddRange(m.GetColorData().ToList());
                 normals.AddRange(m.GetNormals().ToList());
+                texCoords.AddRange(m.GetTextureCoords().ToList());
 
                 vertCount += m.VertCount;
             }
