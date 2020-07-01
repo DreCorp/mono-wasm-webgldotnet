@@ -220,40 +220,64 @@ namespace Engine
 
             foreach (Mesh m in currentScene.objects)
             {
-
-                gl.UniformMatrix4fv(
+                if (sm.GetUniform(sm.mShader, "modelview") != null)
+                {
+                    gl.UniformMatrix4fv(
                     sm.GetUniform(sm.mShader, "modelview"),
                     false,
                     MathHelper.Mat4ToFloatArray(m.ModelViewProjectionMatrix));
-                /*
-                gl.Uniform1i(
-                    sm.GetUniform(sm.mShader, "maintexture"),
-                    m.textureId);
-*/
-                gl.UniformMatrix4fv(
+                }
+
+                if (sm.GetUniform(sm.mShader, "view") != null)
+                {
+                    gl.UniformMatrix4fv(
                     sm.GetUniform(sm.mShader, "view"),
                     false,
                     MathHelper.Mat4ToFloatArray(view));
+                }
 
-
-                gl.UniformMatrix4fv(
+                if (sm.GetUniform(sm.mShader, "view") != null)
+                {
+                    gl.UniformMatrix4fv(
                     sm.GetUniform(sm.mShader, "model"),
                     false,
                     MathHelper.Mat4ToFloatArray(m.modelMatrix));
+                }
 
+                if (sm.GetUniform(sm.mShader, "lightDir") != null)
+                {
+                    gl.Uniform3fv(
+                        sm.GetUniform(sm.mShader, "lightDir"),
+                        currentScene.light.direction);
+                }
 
-                gl.Uniform3fv(sm.GetUniform(sm.mShader, "lightDir"), currentScene.light.direction);
-                gl.Uniform3fv(sm.GetUniform(sm.mShader, "lightColor"), currentScene.light.color);
-                gl.Uniform1f(sm.GetUniform(sm.mShader, "lightAmbientIntens"), currentScene.light.ambientIntensity);
-                gl.Uniform1f(sm.GetUniform(sm.mShader, "lightDiffuseIntens"), currentScene.light.diffuseIntensity);
+                if (sm.GetUniform(sm.mShader, "lightColor") != null)
+                {
+                    gl.Uniform3fv(
+                        sm.GetUniform(sm.mShader, "lightColor"),
+                        currentScene.light.color);
+                }
 
+                if (sm.GetUniform(sm.mShader, "lightAmbientIntens") != null)
+                {
+                    gl.Uniform1f(
+                        sm.GetUniform(sm.mShader, "lightAmbientIntens"),
+                        currentScene.light.ambientIntensity);
+                }
 
-                gl.ActiveTexture(WebGLRenderingContextBase.TEXTURE0);
-                gl.BindTexture(WebGLRenderingContextBase.TEXTURE_2D, cm.texture1);
-                gl.Uniform1i(sm.GetUniform(sm.mShader, "maintexture"), 0);
+                if (sm.GetUniform(sm.mShader, "lightDiffuseIntens") != null)
+                {
+                    gl.Uniform1f(
+                        sm.GetUniform(sm.mShader, "lightDiffuseIntens"),
+                        currentScene.light.diffuseIntensity);
+                }
 
-
-
+                if (sm.GetUniform(sm.mShader, "maintexture") != null)
+                {
+                    gl.ActiveTexture(WebGLRenderingContextBase.TEXTURE0);
+                    gl.BindTexture(WebGLRenderingContextBase.TEXTURE_2D, cm.texture1);
+                    gl.Uniform1i(sm.GetUniform(sm.mShader, "maintexture"), 0);
+                }
 
                 if (!drawLines)
                 {
