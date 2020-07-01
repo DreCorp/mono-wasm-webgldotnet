@@ -33,6 +33,25 @@ namespace Engine
             }
         ";
 
+        public const string lofi_tex_frag_shader = @"
+            precision lowp float;
+
+            varying vec2 fTexCoord;           
+
+            uniform sampler2D maintexture;
+
+            void main(){
+
+                vec2 flipped = vec2(fTexCoord.x, 1.0 - fTexCoord.y);
+
+                vec3 color = texture2D(maintexture, flipped).rgb;
+                color -= abs(sin(flipped.y * 100.0 + 0.1 * 5.0)) * 0.08; // (1)
+                color -= abs(sin(flipped.y * 300.0 - 0.1 * 10.0)) * 0.05; // (2)
+                
+                gl_FragColor = vec4(color, 1.0).rgba;
+            }
+        ";
+
 
         public const string directional_vertex_shader = @"
 

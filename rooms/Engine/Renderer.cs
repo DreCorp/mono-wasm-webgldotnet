@@ -38,11 +38,14 @@ namespace Engine
         {
             Console.WriteLine($"Initializing {this}");
 
-            SceneManager.OnSceneChanged += OnSceneChanged;
+            gl = _mgl;
 
+            cm = new ContentManager();
+            cm.LoadImage(gl);
+
+            SceneManager.OnSceneChanged += OnSceneChanged;
             currentScene = scene;
 
-            gl = _mgl;
             canvasWidth = cw;
             canvasHeight = ch;
 
@@ -61,9 +64,6 @@ namespace Engine
             indexBuffer = gl.CreateBuffer();
 
             sm = new ShaderManager(gl);
-            cm = new ContentManager();
-
-            cm.LoadImage(gl);
 
             AssociateAttribs();
 

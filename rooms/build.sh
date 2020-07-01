@@ -40,4 +40,5 @@ mono $WASM_SDK/packager.exe \
 --asset=./m_helper.js \
 --asset=./Assets/PlainConcepts.png \
 --asset=./Assets/opentksquare.png \
+--asset=./Assets/brick_dark_0.png \
 rooms.dll
