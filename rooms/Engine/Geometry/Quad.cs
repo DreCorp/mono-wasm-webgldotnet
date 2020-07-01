@@ -27,10 +27,10 @@ namespace Engine
             verts = new float[]
             {
                 //CCW
-                -0.5f, 0.5f, 0f,
-                -0.5f,-0.5f, 0f,
+                -0.5f, -0.5f, 0f,
                 0.5f, -0.5f, 0f,
-                0.5f, 0.5f,  0f,
+                0.5f, 0.5f, 0f,
+                -0.5f, 0.5f,  0f,
             };
 
             color = _color;
@@ -52,7 +52,7 @@ namespace Engine
             ushort[] inds = new ushort[]
             {
                 //CCW
-               0,1,2,2,3,0
+               0,1,3,1,2,3
             };
 
             if (offset != 0)
@@ -76,8 +76,8 @@ namespace Engine
             return new float[]
             {
                 0f,0f,
-                -1f,1f,
-                -1f,0f,
+                1f,0f,
+                1f,1f,
                 0f,1f,
             };
         }

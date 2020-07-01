@@ -7,17 +7,17 @@ namespace Engine
     {
         public TestScene() : base()
         {
-            this.cam.position = new Vector3(0f, 0f, 10f);
+            this.cam.position = new Vector3(0f, 0f, 5f);
             GenerateTestCubes();
-            //GenerateTestQuads(50);
+            //GenerateTestQuads();
         }
 
         public override void Update(float e)
         {
             foreach (Mesh m in objects)
             {
-                m.Rotation.Y += e * 2;
-                m.Rotation.Z += e * 2;
+                m.Rotation.Y += e * 1;
+                m.Rotation.Z += e * 1;
             }
         }
 
