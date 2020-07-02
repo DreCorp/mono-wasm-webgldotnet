@@ -22,7 +22,6 @@ Engine/Renderer.cs \
 Engine/Shaders/ShaderManager.cs \
 Engine/Shaders/ShaderProgram.cs \
 Engine/Shaders/ShaderStrings.cs \
-Engine/Utils.cs \
 Engine/Scenes/SceneManager.cs \
 Engine/Scenes/Scene.cs \
 Engine/Scenes/TestScene.cs \
@@ -38,21 +37,5 @@ mono $WASM_SDK/packager.exe \
 --out=./publish \
 --asset=./index.html \
 --asset=./m_helper.js \
---asset=./Assets/brick_dark_0.png \
---asset=./Assets/brick_brown_0.png \
---asset=./Assets/brick_brown-vines_1.png \
---asset=./Assets/beehives_0.png \
---asset=./Assets/brick_gray_0.png \
---asset=./Assets/catacombs_0.png \
---asset=./Assets/church_0.png \
---asset=./Assets/cobalt_rock_1.png \
---asset=./Assets/cobalt_stone_1.png \
---asset=./Assets/crystal_wall_0.png \
---asset=./Assets/emerald_1.png \
---asset=./Assets/hell_1.png \
---asset=./Assets/hive_0.png \
---asset=./Assets/lab-metal_0.png \
---asset=./Assets/lab-rock_0.png \
---asset=./Assets/lab-stone_0.png \
---asset=./Assets/lair_0_new.png \
 rooms.dll
+#--asset=./Assets/brick_dark_0.png \

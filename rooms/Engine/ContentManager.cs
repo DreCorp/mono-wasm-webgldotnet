@@ -8,23 +8,23 @@ namespace Engine
     public class ContentManager
     {
         string[] textureNames = new string[] {
-            "brick_dark_0.png",
-            "brick_brown_0.png",
-            "brick_brown-vines_1.png",
-            "beehives_0.png",
-            "brick_gray_0.png",
-            "catacombs_0.png",
-            "church_0.png",
-            "cobalt_rock_1.png",
-            "cobalt_stone_1.png",
-            "crystal_wall_0.png",
-            "emerald_1.png",
-            "hell_1.png",
-            "hive_0.png",
-            "lab-metal_0.png",
-            "lab-rock_0.png",
-            "lab-stone_0.png",
-            "lair_0_new.png"
+            "Assets/brick_dark_0.png",
+            "Assets/brick_brown_0.png",
+            "Assets/brick_brown-vines_1.png",
+            "Assets/beehives_0.png",
+            "Assets/brick_gray_0.png",
+            "Assets/catacombs_0.png",
+            "Assets/church_0.png",
+            "Assets/cobalt_rock_1.png",
+            "Assets/cobalt_stone_1.png",
+            "Assets/crystal_wall_0.png",
+            "Assets/emerald_1.png",
+            "Assets/hell_1.png",
+            "Assets/hive_0.png",
+            "Assets/lab-metal_0.png",
+            "Assets/lab-rock_0.png",
+            "Assets/lab-stone_0.png",
+            "Assets/lair_0_new.png"
         };
         public static WebGLTexture[] textures;
         Action<JSObject> onLoad;

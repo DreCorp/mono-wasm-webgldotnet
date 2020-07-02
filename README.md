@@ -46,4 +46,6 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * Alternatively run `build.sh` to compile and publish web-assembly files.
 
+* Dont forget to include any assets in `Asset` folder as `ContentManager.cs` depends on it.
+
 * Serve published folder as any other static webpage.
