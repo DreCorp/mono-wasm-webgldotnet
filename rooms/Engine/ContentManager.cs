@@ -29,11 +29,11 @@ namespace Engine
         public static WebGLTexture[] textures;
         Action<JSObject> onLoad;
 
-        WebGLRenderingContext gl;
+
         public ContentManager(WebGLRenderingContext _gl)
         {
             Console.WriteLine($"Initializing {this}");
-            gl = _gl;
+
             textures = new WebGLTexture[textureNames.Length];
             LoadTextures(_gl);
 
@@ -75,15 +75,15 @@ namespace Engine
                 gl.TexImage2D(
                     WebGLRenderingContextBase.TEXTURE_2D,
                     0,
-                    WebGLRenderingContextBase.RGB,
+                    WebGLRenderingContextBase.RGBA,
 
-                    WebGLRenderingContextBase.RGB,
+                    WebGLRenderingContextBase.RGBA,
                     WebGLRenderingContextBase.UNSIGNED_BYTE,
                     image);
 
-                gl.GenerateMipmap(WebGLRenderingContextBase.TEXTURE_2D);
+                //
 
-
+                /*
                 gl.TexParameteri(
                     WebGLRenderingContextBase.TEXTURE_2D,
                     WebGLRenderingContextBase.TEXTURE_WRAP_S,
@@ -92,6 +92,7 @@ namespace Engine
                     WebGLRenderingContextBase.TEXTURE_2D,
                     WebGLRenderingContextBase.TEXTURE_WRAP_T,
                     (int)WebGLRenderingContextBase.CLAMP_TO_EDGE);
+                    */
                 gl.TexParameteri(
                     WebGLRenderingContextBase.TEXTURE_2D,
                     WebGLRenderingContextBase.TEXTURE_MIN_FILTER,
@@ -100,7 +101,7 @@ namespace Engine
                     WebGLRenderingContextBase.TEXTURE_2D,
                     WebGLRenderingContextBase.TEXTURE_MAG_FILTER,
                     (int)WebGLRenderingContextBase.NEAREST);
-
+                /*
                 gl.TexImage2D(
                     WebGLRenderingContextBase.TEXTURE_2D,
                     0,
@@ -108,16 +109,19 @@ namespace Engine
                     WebGLRenderingContextBase.RGB,
                     WebGLRenderingContextBase.UNSIGNED_BYTE,
                     image);
+                */
+                //gl.GenerateMipmap(WebGLRenderingContextBase.TEXTURE_2D);
 
                 //loadEvent.Dispose();
                 //Runtime.FreeObject(onLoad);
 
-                //image.SetObjectProperty("onload", null);
-                //image.Dispose();
+                image.SetObjectProperty("onload", null);
+                image.Dispose();
             });
             image.SetObjectProperty("onload", onLoad);
             image.SetObjectProperty("src", path);
 
+            Console.WriteLine(path);
             return t;
         }
     }

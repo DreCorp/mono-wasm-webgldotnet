@@ -116,6 +116,8 @@ namespace Engine
                     false,
                     3 * sizeof(float),
                     0);
+
+                //gl.BindAttribLocation(sm.mShader.prog, 0, "vPos");
             }
 
             if (sm.GetAttribute(sm.mShader, "vColor") != -1)
@@ -177,6 +179,8 @@ namespace Engine
                     2 * sizeof(float),
                     0);
             }
+
+
 
             gl.BindBuffer(
                 WebGLRenderingContextBase.ELEMENT_ARRAY_BUFFER, indexBuffer);
@@ -275,7 +279,7 @@ namespace Engine
 
                 if (sm.GetUniform(sm.mShader, "maintexture") != null)
                 {
-                    gl.ActiveTexture(WebGLRenderingContextBase.TEXTURE0);
+                    //gl.ActiveTexture(WebGLRenderingContextBase.TEXTURE0);
                     gl.BindTexture(WebGLRenderingContextBase.TEXTURE_2D, ContentManager.textures[m.textureId]);
                     gl.Uniform1i(sm.GetUniform(sm.mShader, "maintexture"), 0);
                 }

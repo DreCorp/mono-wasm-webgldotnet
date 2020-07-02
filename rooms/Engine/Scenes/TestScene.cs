@@ -8,8 +8,8 @@ namespace Engine
         public TestScene() : base()
         {
             this.cam.position = new Vector3(0f, 0f, 12f);
-            GenerateTestCubes(50);
-            //GenerateTestQuads();
+            GenerateTestCubes(100);
+            //GenerateTestQuads(100);
         }
 
         public override void Update(float e)
@@ -39,6 +39,7 @@ namespace Engine
             q.Position = new Vector3(r.Next(-span, span), r.Next(-span, span), r.Next(-span, span));
             q.Rotation = new Vector3((float)r.Next(0, 6), (float)r.Next(0, 6), (float)r.Next(0, 6));
             q.Scale = Vector3.One;
+            q.textureId = r.Next(0, ContentManager.textures.Length);
             q.CalculateNormals();
             objects.Add(q);
         }
