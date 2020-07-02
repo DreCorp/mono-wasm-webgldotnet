@@ -7,19 +7,69 @@ namespace Engine
 {
     public class ContentManager
     {
-        public WebGLTexture texture1;
-
-        const string AssetPath = "opentksquare.png";
+        string[] textureNames = new string[] {
+            "brick_dark_0.png",
+            "brick_brown_0.png",
+            "brick_brown-vines_1.png",
+            "beehives_0.png",
+            "brick_gray_0.png",
+            "catacombs_0.png",
+            "church_0.png",
+            "cobalt_rock_1.png",
+            "cobalt_stone_1.png",
+            "crystal_wall_0.png",
+            "emerald_1.png",
+            "hell_1.png",
+            "hive_0.png",
+            "lab-metal_0.png",
+            "lab-rock_0.png",
+            "lab-stone_0.png",
+            "lair_0_new.png"
+        };
+        public static WebGLTexture[] textures;
         Action<JSObject> onLoad;
 
-        public void LoadImage(WebGLRenderingContext gl)
+        WebGLRenderingContext gl;
+        public ContentManager(WebGLRenderingContext _gl)
         {
-            texture1 = gl.CreateTexture();
+            Console.WriteLine($"Initializing {this}");
+            gl = _gl;
+            textures = new WebGLTexture[textureNames.Length];
+            LoadTextures(_gl);
+
+            onLoad = new Action<JSObject>(loadEvent =>
+            {
+                loadEvent.Dispose();
+                Runtime.FreeObject(onLoad);
+            });
+
+            Console.WriteLine($"Finished {this} initialization");
+        }
+
+        void LoadTextures(WebGLRenderingContext gl)
+        {
+
+            for (int i = 0; i < textureNames.Length; i++)
+            {
+                try
+                {
+                    textures[i] = LoadTexture(gl, textureNames[i]);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+        }
+
+        WebGLTexture LoadTexture(WebGLRenderingContext gl, string path)
+        {
+            WebGLTexture t = gl.CreateTexture();
 
             var image = new HostObject("Image");
             onLoad = new Action<JSObject>(loadEvent =>
             {
-                gl.BindTexture(WebGLRenderingContextBase.TEXTURE_2D, texture1);
+                gl.BindTexture(WebGLRenderingContextBase.TEXTURE_2D, t);
 
 
                 gl.TexImage2D(
@@ -59,16 +109,16 @@ namespace Engine
                     WebGLRenderingContextBase.UNSIGNED_BYTE,
                     image);
 
-                loadEvent.Dispose();
-                Runtime.FreeObject(onLoad);
+                //loadEvent.Dispose();
+                //Runtime.FreeObject(onLoad);
 
-                image.SetObjectProperty("onload", null);
-                image.Dispose();
+                //image.SetObjectProperty("onload", null);
+                //image.Dispose();
             });
             image.SetObjectProperty("onload", onLoad);
-            image.SetObjectProperty("src", AssetPath);
+            image.SetObjectProperty("src", path);
 
-            //gl.BindTexture(WebGL2RenderingContextBase.TEXTURE_2D, texture1);
+            return t;
         }
     }
 }

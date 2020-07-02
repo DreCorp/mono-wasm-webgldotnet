@@ -1,4 +1,5 @@
 using OpenToolkit.Mathematics;
+using WebGLDotNET;
 
 namespace Engine
 {

@@ -7,6 +7,7 @@ class Program
 {
     static JSObject window;
     static JSObject canvas;
+    static ContentManager contentManager;
     static SceneManager sceneManager;
     static Renderer renderer;
     static KControls kcontrols;
@@ -36,8 +37,11 @@ class Program
             canvas.SetObjectProperty("height", height);
         }
 
+        WebGLRenderingContext gl = new WebGLRenderingContext(canvas, contextAttributes);
+
+        contentManager = new ContentManager(gl);
         sceneManager = new SceneManager();
-        renderer = new Renderer(new WebGLRenderingContext(canvas, contextAttributes), width, height, sceneManager.currentScene);
+        renderer = new Renderer(gl, width, height, sceneManager.currentScene);
         renderer.ChangeViewPortSize(width, height);
         kcontrols = new KControls();
 

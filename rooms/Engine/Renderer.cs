@@ -18,7 +18,6 @@ namespace Engine
         int canvasHeight = 100;
         WebGLRenderingContext gl;
         ShaderManager sm;
-        ContentManager cm;
         Scene currentScene;
         WebGLBuffer indexBuffer;
         float[] vertData; //data array of vertex positions
@@ -40,16 +39,18 @@ namespace Engine
 
             gl = _mgl;
 
-            cm = new ContentManager();
-            cm.LoadImage(gl);
-
             SceneManager.OnSceneChanged += OnSceneChanged;
             currentScene = scene;
 
             canvasWidth = cw;
             canvasHeight = ch;
 
-            gl.ClearColor(currentScene.bgColor.X, currentScene.bgColor.Y, currentScene.bgColor.Z, 1.0f);
+            gl.ClearColor(
+                currentScene.bgColor.X,
+                currentScene.bgColor.Y,
+                currentScene.bgColor.Z,
+                1.0f);
+
             gl.Enable(WebGLRenderingContextBase.DEPTH_TEST);
             gl.Enable(WebGLRenderingContextBase.CULL_FACE);
             gl.CullFace(WebGLRenderingContextBase.BACK);
@@ -183,6 +184,8 @@ namespace Engine
                 WebGLRenderingContextBase.ELEMENT_ARRAY_BUFFER,
                 indiceData,
                 WebGLRenderingContextBase.STATIC_DRAW);
+
+            EnableVertexAttribArrays();
         }
 
         public void Update(float dTime)
@@ -213,8 +216,6 @@ namespace Engine
         {
 
             gl.Clear(WebGLRenderingContextBase.COLOR_BUFFER_BIT | WebGLRenderingContextBase.DEPTH_BUFFER_BIT);
-
-            EnableVertexAttribArrays();
 
             int indiceat = 0;
 
@@ -275,7 +276,7 @@ namespace Engine
                 if (sm.GetUniform(sm.mShader, "maintexture") != null)
                 {
                     gl.ActiveTexture(WebGLRenderingContextBase.TEXTURE0);
-                    gl.BindTexture(WebGLRenderingContextBase.TEXTURE_2D, cm.texture1);
+                    gl.BindTexture(WebGLRenderingContextBase.TEXTURE_2D, ContentManager.textures[m.textureId]);
                     gl.Uniform1i(sm.GetUniform(sm.mShader, "maintexture"), 0);
                 }
 

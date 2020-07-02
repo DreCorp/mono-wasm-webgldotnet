@@ -7,8 +7,8 @@ namespace Engine
     {
         public TestScene() : base()
         {
-            this.cam.position = new Vector3(0f, 0f, 5f);
-            GenerateTestCubes();
+            this.cam.position = new Vector3(0f, 0f, 12f);
+            GenerateTestCubes(50);
             //GenerateTestQuads();
         }
 
@@ -41,42 +41,6 @@ namespace Engine
             q.Scale = Vector3.One;
             q.CalculateNormals();
             objects.Add(q);
-        }
-
-        private void GenerateTestSubes(int _amount)
-        {
-            for (int i = 0; i < _amount; i++)
-            {
-                GenerateTestSube();
-            }
-        }
-
-        private void GenerateTestSube()
-        {
-            Random r = new Random();
-            int span = 3;
-
-            Sube s = new Sube();
-            s.color = new Vector3(r.Next(0, 2), r.Next(0, 2), r.Next(0, 2));
-            s.Position = new Vector3(r.Next(-span, span), r.Next(-span, span), r.Next(-span, span));
-            s.Rotation = new Vector3((float)r.Next(0, 6), (float)r.Next(0, 6), (float)r.Next(0, 6));
-            s.Scale = Vector3.One;
-            s.CalculateNormals();
-            objects.Add(s);
-        }
-
-        private void GenerateTestCube()
-        {
-            Random r = new Random();
-            int span = 5;
-
-            Cube c = new Cube();
-            c.color = new Vector3(r.Next(0, 2), r.Next(0, 2), r.Next(0, 2));
-            c.Position = new Vector3(r.Next(-span, span), r.Next(-span, span), r.Next(-span, span));
-            c.Rotation = new Vector3((float)r.Next(0, 6), (float)r.Next(0, 6), (float)r.Next(0, 6));
-            c.Scale = Vector3.One;
-            c.CalculateNormals();
-            objects.Add(c);
         }
 
         private void GenerateTestQuads()
@@ -117,6 +81,22 @@ namespace Engine
             objects.Add(c3);
             objects.Add(c4);
         }
+
+        private void GenerateTestCube()
+        {
+            Random r = new Random();
+            int span = 5;
+
+            Cube c = new Cube();
+            c.color = new Vector3(r.Next(0, 2), r.Next(0, 2), r.Next(0, 2));
+            c.Position = new Vector3(r.Next(-span, span), r.Next(-span, span), r.Next(-span, span));
+            c.Rotation = new Vector3((float)r.Next(0, 6), (float)r.Next(0, 6), (float)r.Next(0, 6));
+            c.Scale = Vector3.One;
+            c.textureId = r.Next(0, ContentManager.textures.Length);
+            c.CalculateNormals();
+            objects.Add(c);
+        }
+
 
         private void GenerateTestCubes(int amount)
         {
@@ -167,6 +147,28 @@ namespace Engine
             objects.Add(c2);
             objects.Add(c3);
             objects.Add(c4);
+        }
+
+        private void GenerateTestSubes(int _amount)
+        {
+            for (int i = 0; i < _amount; i++)
+            {
+                GenerateTestSube();
+            }
+        }
+
+        private void GenerateTestSube()
+        {
+            Random r = new Random();
+            int span = 3;
+
+            Sube s = new Sube();
+            s.color = new Vector3(r.Next(0, 2), r.Next(0, 2), r.Next(0, 2));
+            s.Position = new Vector3(r.Next(-span, span), r.Next(-span, span), r.Next(-span, span));
+            s.Rotation = new Vector3((float)r.Next(0, 6), (float)r.Next(0, 6), (float)r.Next(0, 6));
+            s.Scale = Vector3.One;
+            s.CalculateNormals();
+            objects.Add(s);
         }
 
         public override void AddMesh()
