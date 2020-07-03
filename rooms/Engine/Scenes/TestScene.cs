@@ -5,19 +5,37 @@ namespace Engine
 {
     public class TestScene : Scene
     {
+        float movespeed = 0.05f;
         public TestScene() : base()
         {
             this.cam.position = new Vector3(0f, 0f, 12f);
-            GenerateTestCubes(100);
+            GenerateTestCubes(50);
             //GenerateTestQuads(100);
         }
 
-        public override void Update(float e)
+        public override void Update(float e, KControls input)
         {
             foreach (Mesh m in objects)
             {
                 m.Rotation.Y += e * 1;
                 m.Rotation.Z += e * 1;
+            }
+
+            if (input.up)
+            {
+                cam.Move(0f, movespeed, 0f);
+            }
+            if (input.down)
+            {
+                cam.Move(0f, -movespeed, 0f);
+            }
+            if (input.left)
+            {
+                cam.Move(-movespeed, 0f, 0f);
+            }
+            if (input.right)
+            {
+                cam.Move(movespeed, 0f, 0f);
             }
         }
 
@@ -90,7 +108,7 @@ namespace Engine
 
             Cube c = new Cube();
             c.color = new Vector3(r.Next(0, 2), r.Next(0, 2), r.Next(0, 2));
-            c.Position = new Vector3(r.Next(-span, span), r.Next(-span, span), r.Next(-span, span));
+            c.Position = new Vector3(r.Next(-span - 5, span + 5), r.Next(-span, span), r.Next(-span, span));
             c.Rotation = new Vector3((float)r.Next(0, 6), (float)r.Next(0, 6), (float)r.Next(0, 6));
             c.Scale = Vector3.One;
             c.textureId = r.Next(0, ContentManager.textures.Length);

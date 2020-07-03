@@ -20,7 +20,7 @@ class Program
             Antialias = false,
             PremultipliedAlpha = false,
             Alpha = false,
-            PreferLowPowerToHighPerformance = true
+            PreferLowPowerToHighPerformance = false
         };
 
         window = (JSObject)Runtime.GetGlobalObject("window");
@@ -31,8 +31,9 @@ class Program
         using (var body = (JSObject)document.GetObjectProperty("body"))
         {
             Console.WriteLine("Creating canvas");
-            canvas = (JSObject)document.Invoke("createElement", "canvas");
-            body.Invoke("appendChild", canvas);
+            //canvas = (JSObject)document.Invoke("createElement", "canvas");            
+            //body.Invoke("appendChild", canvas);
+            canvas = (JSObject)document.Invoke("getElementById", "monocanvas");
             canvas.SetObjectProperty("width", width);
             canvas.SetObjectProperty("height", height);
         }
@@ -49,13 +50,15 @@ class Program
     }
     void Update(JSObject e)
     {
-        sceneManager.currentScene.Update(0.02f);
-        renderer.Update(0.02f);
+
 
         kcontrols.up = (bool)e.GetObjectProperty("up");
         kcontrols.down = (bool)e.GetObjectProperty("down");
         kcontrols.left = (bool)e.GetObjectProperty("left");
         kcontrols.right = (bool)e.GetObjectProperty("right");
+
+        sceneManager.currentScene.Update(0.02f, kcontrols);
+        renderer.Update(0.02f);
 
         e.Dispose();
     }
@@ -77,7 +80,7 @@ class Program
     }
 }
 
-struct KControls
+public struct KControls
 {
     public bool up;
     public bool down;
