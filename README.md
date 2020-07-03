@@ -16,9 +16,11 @@ This project initially started as a [Blazor](https://dotnet.microsoft.com/apps/a
 
 * OpenGL with C#: [Neo Kabuto's](https://neokabuto.blogspot.com/) [OpenTK tutorial](https://neokabuto.blogspot.com/p/tutorials.html).
 
+* [Dungeon Crawl texture pack](https://opengameart.org/content/dungeon-crawl-32x32-tiles-supplemental) from [https://opengameart.org/](https://opengameart.org/).
+
 ***
 
-### To compile (Linux only):
+### To compile (Linux):
 
 Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a "Run C# natively in browser") tutorial by [Ali Bahrami](https://github.com/0x414c49):
 
@@ -30,7 +32,7 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * Define a variable called `$WASM_SDK`. For example: `$WASM_SDK="/path/to_wasm_sdk/"`. Dont forget the trailing slash.
 
-* Add compiled `WebGLDotNET.dll` and `OpenToolkit.Mathematics.dll` binaries to the `rooms` folder. At the moment you will need to compile them yourself. You can simply add relevevant references to `.csproj` run `dotnet build`.
+* Add compiled `WebGLDotNET.dll` and `OpenToolkit.Mathematics.dll` binaries to the `rooms` folder. At the moment you will need to compile them yourself. You can simply add relevevant references to `.csproj`, then run `dotnet build`.
 
 * Run `"compile"` command from `build.sh` in the `rooms` folder.
 
@@ -46,6 +48,6 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * Alternatively run `build.sh` to compile and publish web-assembly files.
 
-* Dont forget to include any assets in `Asset` folder as `ContentManager.cs` depends on it.
+* Dont forget to include any assets in `Asset` folder as `ContentManager.cs` depends on them. `Asset` folder included contains some textures from [Dungeon Crawl texture pack](https://opengameart.org/content/dungeon-crawl-32x32-tiles-supplemental) from [https://opengameart.org/](https://opengameart.org/).
 
 * Serve published folder as any other static webpage.
