@@ -36,7 +36,7 @@ mono $WASM_SDK/packager.exe \
 --copy=always \
 --out=./publish \
 --asset=./index.html \
---asset=./m_helper.js \
+--asset=./app.js \
 --linker=true \
 rooms.dll
 #--asset=./Assets/brick_dark_0.png \

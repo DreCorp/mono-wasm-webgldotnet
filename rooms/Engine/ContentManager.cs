@@ -51,14 +51,7 @@ namespace Engine
 
             for (int i = 0; i < textureNames.Length; i++)
             {
-                try
-                {
-                    textures[i] = LoadTexture(gl, textureNames[i]);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                }
+                textures[i] = LoadTexture(gl, textureNames[i]);
             }
         }
 
@@ -81,8 +74,6 @@ namespace Engine
                     WebGLRenderingContextBase.UNSIGNED_BYTE,
                     image);
 
-                //
-
                 /*
                 gl.TexParameteri(
                     WebGLRenderingContextBase.TEXTURE_2D,
@@ -101,15 +92,7 @@ namespace Engine
                     WebGLRenderingContextBase.TEXTURE_2D,
                     WebGLRenderingContextBase.TEXTURE_MAG_FILTER,
                     (int)WebGLRenderingContextBase.NEAREST);
-                /*
-                gl.TexImage2D(
-                    WebGLRenderingContextBase.TEXTURE_2D,
-                    0,
-                    WebGLRenderingContextBase.RGB,
-                    WebGLRenderingContextBase.RGB,
-                    WebGLRenderingContextBase.UNSIGNED_BYTE,
-                    image);
-                */
+
                 //gl.GenerateMipmap(WebGLRenderingContextBase.TEXTURE_2D);
 
                 //loadEvent.Dispose();
@@ -121,7 +104,6 @@ namespace Engine
             image.SetObjectProperty("onload", onLoad);
             image.SetObjectProperty("src", path);
 
-            Console.WriteLine(path);
             return t;
         }
     }
