@@ -21,8 +21,8 @@ namespace Engine
 
         void LoadShader()
         {
-            vs = ShaderStrings.basic_tex_vert_shader;
-            fs = ShaderStrings.basic_tex_frag_shader;
+            vs = ShaderStrings.directional_vertex_shader;
+            fs = ShaderStrings.directional_fragment_shader;
             mShader = new ShaderProgram();
             InitProgram(mShader, vs, fs);
         }

@@ -40,6 +40,7 @@ class Program
 
         WebGLRenderingContext gl = new WebGLRenderingContext(canvas, contextAttributes);
 
+
         contentManager = new ContentManager(gl);
         sceneManager = new SceneManager();
         renderer = new Renderer(gl, width, height, sceneManager.currentScene);
@@ -50,8 +51,6 @@ class Program
     }
     void Update(JSObject e)
     {
-
-
         kcontrols.up = (bool)e.GetObjectProperty("up");
         kcontrols.down = (bool)e.GetObjectProperty("down");
         kcontrols.left = (bool)e.GetObjectProperty("left");

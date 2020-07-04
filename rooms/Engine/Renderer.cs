@@ -12,7 +12,9 @@ namespace Engine
     public class Renderer : IDisposable
     {
         public bool drawLines = false;
-        public bool assocAttribs = false;
+        public bool updateAttributes = false;
+
+        public bool lightUpdated = false;
 
         int canvasWidth = 100;
         int canvasHeight = 100;
@@ -38,8 +40,6 @@ namespace Engine
             Console.WriteLine($"Initializing {this}");
 
             gl = _mgl;
-
-            SceneManager.OnSceneChanged += OnSceneChanged;
             currentScene = scene;
 
             canvasWidth = cw;
@@ -66,12 +66,13 @@ namespace Engine
 
             sm = new ShaderManager(gl);
 
-            AssociateAttribs();
+            SetAttributes();
+            SetLightUniforms();
 
             Console.WriteLine($"Finished {this} initialization");
         }
 
-        public void AssociateAttribs()
+        public void SetAttributes()
         {
             verts.Clear();
             colors.Clear();
@@ -180,8 +181,6 @@ namespace Engine
                     0);
             }
 
-
-
             gl.BindBuffer(
                 WebGLRenderingContextBase.ELEMENT_ARRAY_BUFFER, indexBuffer);
             gl.BufferData(
@@ -190,14 +189,20 @@ namespace Engine
                 WebGLRenderingContextBase.STATIC_DRAW);
 
             EnableVertexAttribArrays();
+
+            if (updateAttributes) updateAttributes = false;
         }
 
         public void Update(float dTime)
         {
-            if (assocAttribs)
+            if (updateAttributes)
             {
-                AssociateAttribs();
-                assocAttribs = false;
+                SetAttributes();
+            }
+
+            if (lightUpdated)
+            {
+                SetLightUniforms();
             }
 
             foreach (Mesh m in currentScene.objects)
@@ -205,7 +210,7 @@ namespace Engine
                 m.CalculateModelMatrix();
 
                 m.ViewProjectionMatrix = currentScene.cam.GetViewMatrix() *
-                    Matrix4.CreatePerspectiveFieldOfView(1.3f, canvasWidth / (float)canvasHeight, 0.1f, 50.0f);
+                    Matrix4.CreatePerspectiveFieldOfView(0.90f, canvasWidth / (float)canvasHeight, 0.1f, 50.0f);
 
                 m.ModelViewProjectionMatrix = m.modelMatrix * m.ViewProjectionMatrix;
             }
@@ -225,6 +230,7 @@ namespace Engine
 
             foreach (Mesh m in currentScene.objects)
             {
+
                 if (sm.GetUniform(sm.mShader, "modelview") != null)
                 {
                     gl.UniformMatrix4fv(
@@ -241,7 +247,7 @@ namespace Engine
                     MathHelper.Mat4ToFloatArray(view));
                 }
 
-                if (sm.GetUniform(sm.mShader, "view") != null)
+                if (sm.GetUniform(sm.mShader, "model") != null)
                 {
                     gl.UniformMatrix4fv(
                     sm.GetUniform(sm.mShader, "model"),
@@ -249,33 +255,6 @@ namespace Engine
                     MathHelper.Mat4ToFloatArray(m.modelMatrix));
                 }
 
-                if (sm.GetUniform(sm.mShader, "lightDir") != null)
-                {
-                    gl.Uniform3fv(
-                        sm.GetUniform(sm.mShader, "lightDir"),
-                        currentScene.light.direction);
-                }
-
-                if (sm.GetUniform(sm.mShader, "lightColor") != null)
-                {
-                    gl.Uniform3fv(
-                        sm.GetUniform(sm.mShader, "lightColor"),
-                        currentScene.light.color);
-                }
-
-                if (sm.GetUniform(sm.mShader, "lightAmbientIntens") != null)
-                {
-                    gl.Uniform1f(
-                        sm.GetUniform(sm.mShader, "lightAmbientIntens"),
-                        currentScene.light.ambientIntensity);
-                }
-
-                if (sm.GetUniform(sm.mShader, "lightDiffuseIntens") != null)
-                {
-                    gl.Uniform1f(
-                        sm.GetUniform(sm.mShader, "lightDiffuseIntens"),
-                        currentScene.light.diffuseIntensity);
-                }
 
                 if (sm.GetUniform(sm.mShader, "maintexture") != null)
                 {
@@ -303,7 +282,6 @@ namespace Engine
 
                 indiceat += m.IndiceCount;
             }
-
             //DisableVertexAttribArrays();
 
             gl.Flush();
@@ -325,17 +303,45 @@ namespace Engine
             }
         }
 
+        public void SetLightUniforms()
+        {
+            if (sm.GetUniform(sm.mShader, "lightDir") != null)
+            {
+                gl.Uniform3fv(
+                    sm.GetUniform(sm.mShader, "lightDir"),
+                    currentScene.light.direction);
+            }
+
+            if (sm.GetUniform(sm.mShader, "lightColor") != null)
+            {
+                gl.Uniform3fv(
+                    sm.GetUniform(sm.mShader, "lightColor"),
+                    currentScene.light.color);
+            }
+
+            if (sm.GetUniform(sm.mShader, "lightAmbientIntens") != null)
+            {
+                gl.Uniform1f(
+                    sm.GetUniform(sm.mShader, "lightAmbientIntens"),
+                    currentScene.light.ambientIntensity);
+            }
+
+            if (sm.GetUniform(sm.mShader, "lightDiffuseIntens") != null)
+            {
+                gl.Uniform1f(
+                    sm.GetUniform(sm.mShader, "lightDiffuseIntens"),
+                    currentScene.light.diffuseIntensity);
+            }
+
+            if (lightUpdated) lightUpdated = false;
+        }
+
         public void ChangeViewPortSize(int w, int h)
         {
             canvasWidth = w;
             canvasHeight = h;
 
             gl.Viewport(0, 0, w, h);
-        }
-
-        void OnSceneChanged(Scene newScene)
-        {
-
         }
 
         public void Dispose()

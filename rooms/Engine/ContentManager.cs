@@ -74,7 +74,7 @@ namespace Engine
                     WebGLRenderingContextBase.UNSIGNED_BYTE,
                     image);
 
-                /*
+
                 gl.TexParameteri(
                     WebGLRenderingContextBase.TEXTURE_2D,
                     WebGLRenderingContextBase.TEXTURE_WRAP_S,
@@ -83,7 +83,7 @@ namespace Engine
                     WebGLRenderingContextBase.TEXTURE_2D,
                     WebGLRenderingContextBase.TEXTURE_WRAP_T,
                     (int)WebGLRenderingContextBase.CLAMP_TO_EDGE);
-                    */
+
                 gl.TexParameteri(
                     WebGLRenderingContextBase.TEXTURE_2D,
                     WebGLRenderingContextBase.TEXTURE_MIN_FILTER,
@@ -93,7 +93,7 @@ namespace Engine
                     WebGLRenderingContextBase.TEXTURE_MAG_FILTER,
                     (int)WebGLRenderingContextBase.NEAREST);
 
-                //gl.GenerateMipmap(WebGLRenderingContextBase.TEXTURE_2D);
+                gl.GenerateMipmap(WebGLRenderingContextBase.TEXTURE_2D);
 
                 //loadEvent.Dispose();
                 //Runtime.FreeObject(onLoad);

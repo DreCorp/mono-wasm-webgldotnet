@@ -3,6 +3,35 @@ namespace Engine
     public static class ShaderStrings
     {
 
+        public const string instanced_vshader = @"
+            attribute vec4 vPos;
+            attribute vec4 vCol;
+            attribute mat4 modelview;
+            uniform mat4 projection;
+            uniform mat4 view;
+
+            varying vec4 fCol;
+
+            void main(){
+                //multiply postion by the matrix
+                gl_Position = projection * view * modelview * vPos;
+
+                //pass vertex color to frag
+                fCol = vCol;
+            }
+        ";
+
+        public const string instanced_fshader = @"
+            precison mediump float;
+
+            varying vec4 fCol;
+
+            void main(){
+
+                gl_FragColor = fCol;
+            }
+        ";
+
         public const string basic_tex_vert_shader = @"
             
             precision lowp float;
