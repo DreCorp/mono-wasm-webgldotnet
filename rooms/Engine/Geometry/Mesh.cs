@@ -5,6 +5,13 @@ namespace Engine
 {
     public abstract class Mesh
     {
+        public Vector3 color { get; set; }
+        public bool isTextured = false;
+        public int textureId;
+        public float[] normals;
+
+        //public virtual int NormalCount { get { return normals.Length; } }
+
         public Vector3 Position = Vector3.Zero;
         public Vector3 Rotation = Vector3.Zero;
         public Vector3 Scale = Vector3.One;
@@ -12,15 +19,19 @@ namespace Engine
         public virtual int VertCount { get; set; }
         public virtual int IndiceCount { get; set; }
         public virtual int ColorDataCount { get; set; }
+        public virtual int TextureCoordCount { get; set; }
+
 
         public Matrix4 modelMatrix = Matrix4.Identity;
         public Matrix4 tempModelMatrix = Matrix4.Identity;
         public Matrix4 ViewProjectionMatrix = Matrix4.Identity;
         public Matrix4 ModelViewProjectionMatrix = Matrix4.Identity;
+
         public abstract float[] GetVerts();
         public abstract ushort[] GetIndices(int offset = 0);
+        public abstract float[] GetColorData();
+        public abstract float[] GetTextureCoords();
 
-        //public abstract void CalculateModelMatrix();
 
         public void CalculateModelMatrix()
         {
@@ -30,18 +41,7 @@ namespace Engine
            * Matrix4.CreateRotationZ(Rotation.Z)
            * Matrix4.CreateTranslation(Position);
         }
-        public abstract float[] GetColorData();
 
-        public Vector3 color { get; set; }
-
-        public bool isTextured = false;
-        public int textureId;
-        public virtual int TextureCoordCount { get; set; }
-
-        public abstract float[] GetTextureCoords();
-
-        public float[] normals;
-        //public virtual int NormalCount { get { return normals.Length; } }
         public virtual float[] GetNormals() { return normals; }
 
         public void CalculateNormals()

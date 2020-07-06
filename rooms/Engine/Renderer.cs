@@ -13,7 +13,6 @@ namespace Engine
     {
         public bool drawLines = false;
         public bool updateAttributes = false;
-
         public bool lightUpdated = false;
 
         int canvasWidth = 100;
@@ -99,7 +98,7 @@ namespace Engine
             normalData = normals.ToArray();
             textureData = texCoords.ToArray();
 
-            if (sm.GetAttribute(sm.mShader, "vPos") != -1)
+            if (sm.GetAttributeLocation(sm.mShader, "vPos") != -1)
             {
                 gl.BindBuffer(
                     WebGLRenderingContextBase.ARRAY_BUFFER,
@@ -111,7 +110,7 @@ namespace Engine
                     WebGLRenderingContextBase.STATIC_DRAW);
 
                 gl.VertexAttribPointer(
-                    (uint)sm.GetAttribute(sm.mShader, "vPos"),
+                    (uint)sm.GetAttributeLocation(sm.mShader, "vPos"),
                     3,
                     WebGLRenderingContextBase.FLOAT,
                     false,
@@ -121,7 +120,7 @@ namespace Engine
                 //gl.BindAttribLocation(sm.mShader.prog, 0, "vPos");
             }
 
-            if (sm.GetAttribute(sm.mShader, "vColor") != -1)
+            if (sm.GetAttributeLocation(sm.mShader, "vColor") != -1)
             {
                 gl.BindBuffer(
                     WebGLRenderingContextBase.ARRAY_BUFFER,
@@ -133,7 +132,7 @@ namespace Engine
                     WebGLRenderingContextBase.STATIC_DRAW);
 
                 gl.VertexAttribPointer(
-                    (uint)sm.GetAttribute(sm.mShader, "vColor"),
+                    (uint)sm.GetAttributeLocation(sm.mShader, "vColor"),
                     3,
                     WebGLRenderingContextBase.FLOAT,
                     false,
@@ -141,7 +140,7 @@ namespace Engine
                     0);
             }
 
-            if (sm.GetAttribute(sm.mShader, "vNormal") != -1)
+            if (sm.GetAttributeLocation(sm.mShader, "vNormal") != -1)
             {
                 gl.BindBuffer(
                     WebGLRenderingContextBase.ARRAY_BUFFER,
@@ -153,7 +152,7 @@ namespace Engine
                     WebGLRenderingContextBase.STATIC_DRAW);
 
                 gl.VertexAttribPointer(
-                    (uint)sm.GetAttribute(sm.mShader, "vNormal"),
+                    (uint)sm.GetAttributeLocation(sm.mShader, "vNormal"),
                     3,
                     WebGLRenderingContextBase.FLOAT,
                     false,
@@ -161,7 +160,7 @@ namespace Engine
                     0);
             }
 
-            if (sm.GetAttribute(sm.mShader, "texCoord") != -1)
+            if (sm.GetAttributeLocation(sm.mShader, "texCoord") != -1)
             {
                 gl.BindBuffer(
                     WebGLRenderingContext.ARRAY_BUFFER,
@@ -173,7 +172,7 @@ namespace Engine
                     WebGLRenderingContext.STATIC_DRAW);
 
                 gl.VertexAttribPointer(
-                    (uint)sm.GetAttribute(sm.mShader, "texCoord"),
+                    (uint)sm.GetAttributeLocation(sm.mShader, "texCoord"),
                     2,
                     WebGLRenderingContext.FLOAT,
                     false,
@@ -231,36 +230,35 @@ namespace Engine
             foreach (Mesh m in currentScene.objects)
             {
 
-                if (sm.GetUniform(sm.mShader, "modelview") != null)
+                if (sm.GetUniformLocation(sm.mShader, "modelview") != null)
                 {
                     gl.UniformMatrix4fv(
-                    sm.GetUniform(sm.mShader, "modelview"),
+                    sm.GetUniformLocation(sm.mShader, "modelview"),
                     false,
                     MathHelper.Mat4ToFloatArray(m.ModelViewProjectionMatrix));
                 }
 
-                if (sm.GetUniform(sm.mShader, "view") != null)
+                if (sm.GetUniformLocation(sm.mShader, "view") != null)
                 {
                     gl.UniformMatrix4fv(
-                    sm.GetUniform(sm.mShader, "view"),
+                    sm.GetUniformLocation(sm.mShader, "view"),
                     false,
                     MathHelper.Mat4ToFloatArray(view));
                 }
 
-                if (sm.GetUniform(sm.mShader, "model") != null)
+                if (sm.GetUniformLocation(sm.mShader, "model") != null)
                 {
                     gl.UniformMatrix4fv(
-                    sm.GetUniform(sm.mShader, "model"),
+                    sm.GetUniformLocation(sm.mShader, "model"),
                     false,
                     MathHelper.Mat4ToFloatArray(m.modelMatrix));
                 }
 
-
-                if (sm.GetUniform(sm.mShader, "maintexture") != null)
+                if (sm.GetUniformLocation(sm.mShader, "maintexture") != null)
                 {
                     //gl.ActiveTexture(WebGLRenderingContextBase.TEXTURE0);
                     gl.BindTexture(WebGLRenderingContextBase.TEXTURE_2D, ContentManager.textures[m.textureId]);
-                    gl.Uniform1i(sm.GetUniform(sm.mShader, "maintexture"), 0);
+                    gl.Uniform1i(sm.GetUniformLocation(sm.mShader, "maintexture"), 0);
                 }
 
                 if (!drawLines)
@@ -305,31 +303,31 @@ namespace Engine
 
         public void SetLightUniforms()
         {
-            if (sm.GetUniform(sm.mShader, "lightDir") != null)
+            if (sm.GetUniformLocation(sm.mShader, "lightDir") != null)
             {
                 gl.Uniform3fv(
-                    sm.GetUniform(sm.mShader, "lightDir"),
+                    sm.GetUniformLocation(sm.mShader, "lightDir"),
                     currentScene.light.direction);
             }
 
-            if (sm.GetUniform(sm.mShader, "lightColor") != null)
+            if (sm.GetUniformLocation(sm.mShader, "lightColor") != null)
             {
                 gl.Uniform3fv(
-                    sm.GetUniform(sm.mShader, "lightColor"),
+                    sm.GetUniformLocation(sm.mShader, "lightColor"),
                     currentScene.light.color);
             }
 
-            if (sm.GetUniform(sm.mShader, "lightAmbientIntens") != null)
+            if (sm.GetUniformLocation(sm.mShader, "lightAmbientIntens") != null)
             {
                 gl.Uniform1f(
-                    sm.GetUniform(sm.mShader, "lightAmbientIntens"),
+                    sm.GetUniformLocation(sm.mShader, "lightAmbientIntens"),
                     currentScene.light.ambientIntensity);
             }
 
-            if (sm.GetUniform(sm.mShader, "lightDiffuseIntens") != null)
+            if (sm.GetUniformLocation(sm.mShader, "lightDiffuseIntens") != null)
             {
                 gl.Uniform1f(
-                    sm.GetUniform(sm.mShader, "lightDiffuseIntens"),
+                    sm.GetUniformLocation(sm.mShader, "lightDiffuseIntens"),
                     currentScene.light.diffuseIntensity);
             }
 

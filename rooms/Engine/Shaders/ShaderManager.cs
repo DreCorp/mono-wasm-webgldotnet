@@ -124,13 +124,13 @@ namespace Engine
             program.buffers.Add(_name, gl.CreateBuffer());
         }
 
-        public int GetAttribute(ShaderProgram program, string _name)
+        public int GetAttributeLocation(ShaderProgram program, string _name)
         {
             if (program.attribs.ContainsKey(_name)) return (int)program.attribs[_name].address;
             else return -1;
         }
 
-        public WebGLUniformLocation GetUniform(ShaderProgram program, string _name)
+        public WebGLUniformLocation GetUniformLocation(ShaderProgram program, string _name)
         {
             if (program.uniforms.ContainsKey(_name)) return program.uniforms[_name].address;
             else return null;

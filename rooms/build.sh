@@ -27,7 +27,6 @@ Engine/Scenes/Scene.cs \
 Engine/Scenes/TestScene.cs \
 Engine/Geometry/Cube.cs \
 Engine/Geometry/Mesh.cs \
-Engine/Geometry/Point.cs \
 Engine/Geometry/Quad.cs \
 Engine/Geometry/Sube.cs \
 && 
