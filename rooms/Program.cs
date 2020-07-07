@@ -51,10 +51,17 @@ class Program
     }
     void Update(JSObject e)
     {
-        kcontrols.up = (bool)e.GetObjectProperty("up");
-        kcontrols.down = (bool)e.GetObjectProperty("down");
+        kcontrols.forward = (bool)e.GetObjectProperty("forward");
+        kcontrols.backward = (bool)e.GetObjectProperty("backward");
+
         kcontrols.left = (bool)e.GetObjectProperty("left");
         kcontrols.right = (bool)e.GetObjectProperty("right");
+
+        kcontrols.up = (bool)e.GetObjectProperty("up");
+        kcontrols.down = (bool)e.GetObjectProperty("down");
+
+        kcontrols.rotLeft = (bool)e.GetObjectProperty("rot_left");
+        kcontrols.rotRight = (bool)e.GetObjectProperty("rot_right");
 
         sceneManager.currentScene.Update(0.02f, kcontrols);
         renderer.Update(0.02f);
@@ -81,8 +88,14 @@ class Program
 
 public struct KControls
 {
-    public bool up;
-    public bool down;
+    public bool forward;
+    public bool backward;
     public bool left;
     public bool right;
+
+    public bool up;
+    public bool down;
+
+    public bool rotLeft;
+    public bool rotRight;
 }

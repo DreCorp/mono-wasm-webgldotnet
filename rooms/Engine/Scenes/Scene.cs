@@ -21,7 +21,7 @@ namespace Engine
             cam.position = new Vector3(0, 0, 5);
 
             light = new Light();
-            light.direction = new float[] { 0.0f, 1.0f, 40.0f };
+            light.direction = new float[] { 0.0f, 1.0f, 0.0f };
             light.ambientIntensity = 0.9f;
             light.diffuseIntensity = 0.9f;
             light.color = new float[] { 0.9f, 0.9f, 0.9f };

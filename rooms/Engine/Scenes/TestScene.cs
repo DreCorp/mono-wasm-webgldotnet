@@ -20,22 +20,24 @@ namespace Engine
                 m.Rotation.Z += e * 1;
             }
 
-            if (input.up)
-            {
-                cam.Move(0f, movespeed, 0f);
-            }
-            if (input.down)
-            {
-                cam.Move(0f, -movespeed, 0f);
-            }
-            if (input.left)
-            {
-                cam.Move(-movespeed, 0f, 0f);
-            }
-            if (input.right)
-            {
-                cam.Move(movespeed, 0f, 0f);
-            }
+            if (input.forward) cam.Move(0f, movespeed, 0f);
+
+            if (input.backward) cam.Move(0f, -movespeed, 0f);
+
+            if (input.left) cam.Move(-movespeed, 0f, 0f);
+
+            if (input.right) cam.Move(movespeed, 0f, 0f);
+
+            if (input.up) cam.Move(0, 0, movespeed);
+
+            if (input.down) cam.Move(0, 0, -movespeed);
+
+
+
+            if (input.rotLeft) cam.AddRotation(1f, 0);
+
+            if (input.rotRight) cam.AddRotation(-1f, 0);
+
         }
 
 
