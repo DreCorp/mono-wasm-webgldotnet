@@ -1,15 +1,13 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Microsoft.Win32.SafeHandles;
 using WebGLDotNET;
 using OpenToolkit.Mathematics;
 
 
 namespace Engine
 {
-    public class Renderer : IDisposable
+    public class Renderer
     {
         public bool drawLines = false;
         public bool updateAttributes = false;
@@ -340,33 +338,6 @@ namespace Engine
             canvasHeight = h;
 
             gl.Viewport(0, 0, w, h);
-        }
-
-        public void Dispose()
-        {
-            Console.WriteLine($"Disposing of {this}...");
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        // Flag: Has Dispose already been called?
-        bool disposed = false;
-        // Instantiate a SafeHandle instance.
-        SafeHandle handle = new SafeFileHandle(IntPtr.Zero, true);
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposed)
-                return;
-
-            if (disposing)
-            {
-                handle.Dispose();
-                // Free any other managed objects here.
-                //
-                gl.Dispose();
-
-            }
-
-            disposed = true;
         }
     }
 }

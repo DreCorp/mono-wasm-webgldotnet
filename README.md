@@ -2,19 +2,29 @@
  
 ## A WASM and WebGL experiment using C# with [mono-wasm](https://www.mono-project.com/news/2018/01/16/mono-static-webassembly-compilation/ "mono-wasm") and [WebGLDotNET](https://github.com/WaveEngine/WebGL.NET "WebGLDotNET").
 
-See this project running at [https://rwasm.netlify.app](https://rwasm.netlify.app)
+***
+
+#### Disclaimer:
+
+Current size of a compiled and "ready-to-serve" static page is 16mb+.
 
 ***
 
-This project initially started as a [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) app, you can see it running [here](https://dwasm.netlify.app).
+See this project running at [https://rwasm.netlify.app](https://rwasm.netlify.app).
+
+Use `WASD` for horizontal controls, `Q` & `D` for vertical controls and `←` & `→` to rotate on horizontal axis. 
+
+***
+
+This project initially started as a [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) app, you can see it running [here](https://dwasm.netlify.app).s
 
 ***
 
 ### Resources used:
 
-* [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a) guide by [Ali Bahrami](https://github.com/0x414c49).
+* [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a) guide by [0x414c49](https://github.com/0x414c49).
 
-* [Ali's](https://github.com/0x414c49) basic mono-wasm [example](https://github.com/0x414c49/mono-wasm-example).
+* [0x414c49's](https://github.com/0x414c49) basic mono-wasm [example](https://github.com/0x414c49/mono-wasm-example).
 
 * Using `WebGLDotNET`: [Your first WebGL.NET app](https://geeks.ms/xamarinteam/2019/08/28/your-first-webgldotnet-app/) guide.
 
@@ -36,7 +46,7 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * Define a variable called `$WASM_SDK`. For example: `$WASM_SDK="/path/to_wasm_sdk/"`. Dont forget the trailing slash.
 
-* Add compiled `WebGLDotNET.dll` and `OpenToolkit.Mathematics.dll` binaries to the `rooms` folder. At the moment you will need to compile them yourself. You can simply add relevevant references to `.csproj`, then run `dotnet build`.
+* Add compiled `WebGLDotNET.dll` and `OpenToolkit.Mathematics.dll` binaries to the `rooms` folder. At the moment you will need to compile them yourself. You can simply add relevant references to `.csproj`, then run `dotnet build`.
 
 * Run `"compile"` command from `build.sh` in the `rooms` folder.
 
@@ -52,6 +62,6 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * Alternatively run `build.sh` to compile and publish web-assembly files.
 
-* Dont forget to include any assets in `Asset` folder as `ContentManager.cs` depends on them. `Asset` folder included contains some textures from [Dungeon Crawl texture pack](https://opengameart.org/content/dungeon-crawl-32x32-tiles-supplemental) from [https://opengameart.org/](https://opengameart.org/).
+* __Optional__: include any assets in `Asset` folder as `ContentManager.cs` depends on them. `Asset` folder included contains some textures from [Dungeon Crawl texture pack](https://opengameart.org/content/dungeon-crawl-32x32-tiles-supplemental) from [https://opengameart.org/](https://opengameart.org/). Those are used with the `basic_texture` shader.
 
 * Serve published folder as any other static webpage.
