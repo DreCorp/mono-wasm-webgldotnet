@@ -1,14 +1,3 @@
-window.addEventListener('resize', () => {
-    var c = document.getElementsByTagName('canvas')[0];
-
-    if (c !== undefined) {
-        c.width = window.innerWidth;
-        c.height = window.innerHeight;
-
-        that.resize(c.width, c.height);
-    }
-});
-
 let that = this;
 
 var App = {
@@ -23,6 +12,17 @@ var App = {
 };
 
 document.body.addEventListener("load", App.init);
+
+window.addEventListener('resize', () => {
+    var c = document.getElementsByTagName('canvas')[0];
+
+    if (c !== undefined) {
+        c.width = window.innerWidth;
+        c.height = window.innerHeight;
+
+        that.resize(c.width, c.height);
+    }
+});
 
 let keyspressed = {
     forward: false,

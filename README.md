@@ -12,7 +12,10 @@ Current size of a compiled and "ready-to-serve" static page is 16mb+.
 
 See this project running at [https://rwasm.netlify.app](https://rwasm.netlify.app).
 
-Use `WASD` for horizontal controls, `Q` & `D` for vertical controls and `←` & `→` to rotate on horizontal axis. 
+Use `WASD` for horizontal controls, 
+`Q` & `D` for vertical controls, 
+`←` & `→` to rotate on horizontal axis,
+`P` to switch between `TRINGLES` and `LINES` drawing modes.
 
 ***
 
