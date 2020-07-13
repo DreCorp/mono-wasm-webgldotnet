@@ -13,7 +13,7 @@ Current size of a compiled and "ready-to-serve" static page is 16mb+.
 See this project running at [https://rwasm.netlify.app](https://rwasm.netlify.app).
 
 `WASD` for horizontal controls,  
-`Q` & `D` for vertical controls,  
+`Q` & `E` for vertical controls,  
 `←` & `→` to rotate on horizontal axis,  
 `P` to switch between `TRINGLES` and `LINES` drawing modes.
 
@@ -42,7 +42,7 @@ This project initially started as a [Blazor](https://dotnet.microsoft.com/apps/a
 
 ### To compile (on Linux):
 
-Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a "Run C# natively in browser") tutorial by [Ali Bahrami](https://github.com/0x414c49):
+Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a "Run C# natively in browser") tutorial by [0x414c49](https://github.com/0x414c49):
 
 * Download and install Mono SDK for your OS.
 
