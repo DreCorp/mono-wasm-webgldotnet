@@ -1,6 +1,6 @@
 # ROOMS
  
-## A WASM and WebGL experiment using C# with [mono-wasm](https://www.mono-project.com/news/2018/01/16/mono-static-webassembly-compilation/ "mono-wasm") and [WebGLDotNET](https://github.com/WaveEngine/WebGL.NET "WebGLDotNET").
+## WASM and WebGL experiment using C# with [mono-wasm](https://www.mono-project.com/news/2018/01/16/mono-static-webassembly-compilation/ "mono-wasm") and [WebGLDotNET](https://github.com/WaveEngine/WebGL.NET "WebGLDotNET").
 
 
 
@@ -12,10 +12,13 @@ Current size of a compiled and "ready-to-serve" static page is 16mb+.
 
 See this project running at [https://rwasm.netlify.app](https://rwasm.netlify.app).
 
-Use `WASD` for horizontal controls,  
+`WASD` for horizontal controls,  
 `Q` & `D` for vertical controls,  
 `←` & `→` to rotate on horizontal axis,  
 `P` to switch between `TRINGLES` and `LINES` drawing modes.
+
+
+Please post any issues, suggestions, optimizations to issues tab.
 
 ***
 
@@ -33,7 +36,7 @@ This project initially started as a [Blazor](https://dotnet.microsoft.com/apps/a
 
 * OpenGL with C#: [Neo Kabuto's](https://neokabuto.blogspot.com/) [OpenTK tutorial](https://neokabuto.blogspot.com/p/tutorials.html).
 
-* [Dungeon Crawl texture pack](https://opengameart.org/content/dungeon-crawl-32x32-tiles-supplemental) from [https://opengameart.org/](https://opengameart.org/).
+* __Optional__ [Dungeon Crawl texture pack](https://opengameart.org/content/dungeon-crawl-32x32-tiles-supplemental) from [https://opengameart.org/](https://opengameart.org/). Read further for more info.
 
 ***
 
