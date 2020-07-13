@@ -2,7 +2,7 @@
  
 ## A WASM and WebGL experiment using C# with [mono-wasm](https://www.mono-project.com/news/2018/01/16/mono-static-webassembly-compilation/ "mono-wasm") and [WebGLDotNET](https://github.com/WaveEngine/WebGL.NET "WebGLDotNET").
 
-***
+
 
 #### Disclaimer:
 
@@ -16,7 +16,7 @@ Use `WASD` for horizontal controls, `Q` & `D` for vertical controls and `←` & 
 
 ***
 
-This project initially started as a [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) app, you can see it running [here](https://dwasm.netlify.app).s
+This project initially started as a [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) app, you can see it running [here](https://dwasm.netlify.app).
 
 ***
 
@@ -34,7 +34,7 @@ This project initially started as a [Blazor](https://dotnet.microsoft.com/apps/a
 
 ***
 
-### To compile (Linux):
+### To compile (on Linux):
 
 Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-browser-through-the-web-assembly-via-mono-wasm-60f3d55dd05a "Run C# natively in browser") tutorial by [Ali Bahrami](https://github.com/0x414c49):
 
