@@ -2,11 +2,11 @@ let that = this;
 
 var App = {
     init: function () {
-        that.start = Module.mono_bind_static_method("[rooms] Program:Main");
-        that.resize = Module.mono_bind_static_method("[rooms] Program:ResizeViewport");
-        that.update = Module.mono_bind_static_method("[rooms] Program:Update");
-        that.change = Module.mono_bind_static_method("[rooms] Program:ChangeDrawPrimitive");
-        that.add = Module.mono_bind_static_method("[rooms] Program:AddCube");
+        that.start = Module.mono_bind_static_method("[mwwgdn] Program:Main");
+        that.resize = Module.mono_bind_static_method("[mwwgdn] Program:ResizeViewport");
+        that.update = Module.mono_bind_static_method("[mwwgdn] Program:Update");
+        that.change = Module.mono_bind_static_method("[mwwgdn] Program:ChangeDrawPrimitive");
+        that.add = Module.mono_bind_static_method("[mwwgdn] Program:AddCube");
         that.start();
     }
 };

@@ -1,7 +1,7 @@
 #!/bin/bash
 #"compile" command:
 mcs /target:library \
--out:rooms.dll \
+-out:mwwgdn.dll \
 /noconfig \
 /nostdlib \
 /r:$WASM_SDK/wasm-bcl/wasm/mscorlib.dll \
@@ -37,5 +37,5 @@ mono $WASM_SDK/packager.exe \
 --asset=./index.html \
 --asset=./app.js \
 --linker=true \
-rooms.dll
+mwwgdn.dll
 #--asset=./Assets/brick_dark_0.png \

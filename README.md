@@ -1,4 +1,4 @@
-# ROOMS
+# MonoWASM_WebGLDotNet
  
 ## WASM and WebGL experiment using C# with [mono-wasm](https://www.mono-project.com/news/2018/01/16/mono-static-webassembly-compilation/ "mono-wasm") and [WebGLDotNET](https://github.com/WaveEngine/WebGL.NET "WebGLDotNET").
 
@@ -60,7 +60,7 @@ Following [Run C# natively in browser](https://itnext.io/run-c-natively-in-the-b
 
 * The `-out:` in the `"compile"` command defines output of your assembly. Add any other C# files at the end of the command. For example `SomeCSharpFile.cs`.
 
-* If compiles successfully, `rooms.dll` binary should be created.
+* If compiles successfully, `mwwgdn.dll` binary should be created.
 
 * Publish the binary for web-assembly with `"publish"` command from the `build.sh`. This command runs `packager.exe`, a tool from Mono that publishes ready to serve web-assembly files.
 
