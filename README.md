@@ -1,4 +1,4 @@
-# MonoWASM_WebGLDotNet
+# MONO-WASM-WEBGLDOTNET(deprecated)
  
 ## WASM and WebGL experiment using C# with [mono-wasm](https://www.mono-project.com/news/2018/01/16/mono-static-webassembly-compilation/ "mono-wasm") and [WebGLDotNET](https://github.com/WaveEngine/WebGL.NET "WebGLDotNET").
 

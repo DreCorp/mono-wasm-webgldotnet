@@ -9,15 +9,19 @@ namespace Engine
         public TestScene() : base()
         {
             this.cam.position = new Vector3(0f, 0f, 12f);
-            GenerateTestCubes(50);
+            //GenerateTestCubes(100);
+            //GenerateTestQuads(50);
+            GenerateGrid(7);
         }
+
+
 
         public override void Update(float e, KControls input)
         {
             foreach (Mesh m in objects)
             {
-                m.Rotation.Y += e * 1;
-                m.Rotation.Z += e * 1;
+                //m.Rotation.Y += e * 1;
+                //m.Rotation.Z += e * 1;
             }
 
             if (input.forward) cam.Move(0f, movespeed, 0f);
@@ -49,7 +53,7 @@ namespace Engine
                 for (int y = 0; y < size; y++)
                 {
                     Quad q = new Quad();
-                    q.color = new Vector3(1, 1, 1);
+                    q.color = new Vector3(r.Next(0, 2), r.Next(0, 2), r.Next(0, 2));
                     q.Position = new Vector3(x - (size / 2), y - (size / 2), 0);
                     q.Rotation = new Vector3(0, 0, 0);
                     q.Scale = new Vector3(0.9f, 0.9f, 0f);
@@ -57,6 +61,7 @@ namespace Engine
                     q.CalculateNormals();
 
                     objects.Add(q);
+                    Console.WriteLine(q.Position.ToString());
                 }
             }
         }
@@ -76,7 +81,8 @@ namespace Engine
             Quad q = new Quad();
             q.color = new Vector3(r.Next(0, 2), r.Next(0, 2), r.Next(0, 2));
             q.Position = new Vector3(r.Next(-span, span), r.Next(-span, span), r.Next(-span, span));
-            q.Rotation = new Vector3((float)r.Next(0, 6), (float)r.Next(0, 6), (float)r.Next(0, 6));
+            q.Rotation = new Vector3(0, 0, 0);
+
             q.Scale = Vector3.One;
             q.textureId = r.Next(0, ContentManager.textures.Length);
             q.CalculateNormals();
